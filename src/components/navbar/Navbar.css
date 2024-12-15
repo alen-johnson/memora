@@ -1,7 +1,7 @@
 .navbar {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 110px;
     /* background-color: #a5b9d7; */
     justify-content: center;
     border-radius: 5px
@@ -21,12 +21,12 @@
   
   .navbar__button:not(:active):hover,
   .navbar__button:focus {
-    background-color: #a9c0dd;
+    background-color: #dee4eb;
   }
   
   .navbar__button:focus,
   .navbar__button:active {
-    background-color: #72869a;
+    background-color: #acb6c0;
     outline: none;
   }
   
@@ -50,3 +50,4 @@
   .navbar__button svg {
     width: 15px
   }
+
