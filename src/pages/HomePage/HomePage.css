@@ -1,7 +1,7 @@
-/* General Layout */
 .home {
   display: flex;
   flex-direction: column;
+  width: 99vw;
 }
 
 .home__header {
@@ -12,6 +12,7 @@
 .home__header img {
   width: 50px;
   height: 50px;
+  margin: 0 10px 0 0;
 }
 
 .home__body {
@@ -79,7 +80,7 @@
   font-size: 1rem;
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 770px) {
   .navbar-menu {
     display: none; 
   }

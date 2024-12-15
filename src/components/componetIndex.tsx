@@ -4,3 +4,4 @@ export { default as Explore } from "./explore/Explore";
 export { default as Recents } from "./recents/Recents";
 export { default as Notifications } from "./notifications/Notification";
 export { default as LikeButton } from "./likeButton/LikeButton";
+export { default as ShareModal } from "./shareModal/ShareModal";
