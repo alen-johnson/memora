@@ -3,7 +3,7 @@ import { profile } from '../../assets/imageIndex';
 import './HomePage.css';
 import { PlusOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
-import { Explore, Feed, Navbar, Notifications, Recents } from '../../components/componetIndex';
+import { Explore, Feed, Friends, Navbar, Notifications} from '../../components/componetIndex';
 import { useNavigate } from 'react-router-dom';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri'; 
 
@@ -75,7 +75,7 @@ function HomePage() {
         <div className='home__body-content'>
           {tab === 'Feed' && <Feed />}
           {tab === 'Explore' && <Explore />}
-          {tab === 'Recents' && <Recents />}
+          {tab === 'Friends' && <Friends />}
           {tab === 'Notifications' && <Notifications />}
         </div>
 

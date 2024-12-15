@@ -1,4 +1,4 @@
-import './Recents.css'
+import './Friends.css'
 
 function Recents() {
   return (

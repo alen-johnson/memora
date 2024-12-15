@@ -14,14 +14,13 @@ function Navbar(props: { onTabChange: (tab: string) => void }) {
           onClick={() => props.onTabChange("Explore")}
           className="navbar__button"
         >
-          {" "}
           Explore
         </button>
         <button
-          onClick={() => props.onTabChange("Recents")}
+          onClick={() => props.onTabChange("Friends")}
           className="navbar__button"
         >
-          Recents
+          Friends
         </button>
         <button
           onClick={() => props.onTabChange("Notifications")}

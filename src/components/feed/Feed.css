@@ -2,6 +2,12 @@
 .feed-wrapper h2 {
   padding: 0 0 0 3rem;
 }
+.feed__radionav{
+  display: flex;
+  width:90%;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .feed {
   display: flex;
@@ -9,7 +15,7 @@
   background-color: blanchedalmond;
   max-width: 460px;
   border-radius: 40px;
-  margin: 20px;
+  margin: 15px;
 }
 
 .feed__header {
