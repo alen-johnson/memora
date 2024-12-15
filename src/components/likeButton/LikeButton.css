@@ -1,9 +1,13 @@
-/* From Uiverse.io by catraco */ 
+.heart{
+  display: flex;
+  padding: 10px 0 20px 1.5rem;
+}
+
 .heart-container {
     --heart-color: rgb(255, 91, 137);
     position: relative;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     transition: .3s;
   }
   
@@ -51,6 +55,12 @@
   
   .heart-container .checkbox:checked~.svg-container .svg-celebrate {
     display: block
+  }
+
+  .heart-likes{
+    margin: 5px;
+    line-height: 1.2;
+    font-size: large;
   }
   
   @keyframes keyframes-svg-filled {

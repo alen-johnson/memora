@@ -1,13 +1,13 @@
 
 .feed-wrapper h2 {
-  padding: 0 0 0 1rem;
+  padding: 0 0 0 3rem;
 }
 
 .feed {
   display: flex;
   flex-direction: column;
   background-color: blanchedalmond;
-  width: 460px;
+  max-width: 460px;
   border-radius: 40px;
   margin: 20px;
 }
@@ -69,5 +69,6 @@
 .feed__footer{
     padding: 10px 1rem 0 1rem;
     display: flex;
+    width: 88%;
     justify-content: space-between;
 }

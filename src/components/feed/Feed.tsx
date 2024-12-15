@@ -1,10 +1,12 @@
-import { Button } from "antd";
-import { LikeButton } from "../componetIndex";
+import { Button, Modal } from "antd";
+import { LikeButton, ShareModal } from "../componetIndex";
 import "./Feed.css";
 import { ShareAltOutlined } from "@ant-design/icons";
 
 // this is to be removed after dynamic imports (dummy data)
 import { img1, img2, img3, img4, profile } from "../../assets/imageIndex";
+import { useState } from "react";
+
 const feedData = [
   {
     id: 1,
@@ -40,7 +42,14 @@ const feedData = [
   },
 ];
 
+// till here
+
 function Feed() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const setModal = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <div className="feed-wrapper">
       <h2>Feeds</h2>
@@ -55,8 +64,8 @@ function Feed() {
               </div>
             </div>
             <div className="feed__header-content">
-            <p>{feed.caption}</p>
-          </div>
+              <p>{feed.caption}</p>
+            </div>
           </div>
 
           <div className="feed__content">
@@ -65,7 +74,12 @@ function Feed() {
 
           <div className="feed__footer">
             <LikeButton />
-            <Button icon={<ShareAltOutlined />}>Share</Button>
+            <Button onClick={setModal} icon={<ShareAltOutlined />}>
+              Share
+            </Button>
+            <Modal title={<span style={{ fontSize: '24px', fontWeight: 'bold' }}>Share Post</span>} open={isOpen} onCancel={setModal} mask={true} footer={null} width={400}>
+              <ShareModal/>
+            </Modal>
           </div>
         </div>
       ))}
