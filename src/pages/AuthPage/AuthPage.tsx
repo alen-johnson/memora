@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, Modal } from "antd";
 import {
   img1,
   img2,
@@ -14,12 +14,25 @@ import {
 import "./Authpage.css";
 import { GoogleOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { AuthModal, GoogleModal } from "../../components/componetIndex";
 
 function AuthPage() {
   const navigate = useNavigate();
-  const handleAuth = () => {
-    navigate('/');
+  const [isGoogleOpen, setIsGoogleOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false)
+
+  const handleGoogleModal = () => {
+    setIsGoogleOpen(!isGoogleOpen);
+  };
+  const handleLoginModal = () => {
+    setIsLoginOpen(!isLoginOpen)
   }
+  // @ts-ignore
+  const handleAuth = () => {
+    navigate("/");
+  };
+
   return (
     <div className="auth">
       <div className="auth__images">
@@ -39,9 +52,37 @@ function AuthPage() {
           <h2>Vibesnap</h2>
         </div>
         <p>Moments That Matter, Shared Forever</p>
-        <Button onClick={handleAuth} icon={<GoogleOutlined style={{color: "red"}}/>  }>Continue with Google</Button>
+        <Button
+          onClick={handleGoogleModal}
+          icon={<GoogleOutlined style={{ color: "red" }} />}
+        >
+          Continue with Google
+        </Button>
+        <Modal
+          open={isGoogleOpen}
+          onCancel={handleGoogleModal}
+          footer={null}
+          mask={true}
+          maskStyle={{
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+          }}
+        >
+          <GoogleModal />
+        </Modal>
         <p>OR</p>
-        <Button >Sign In</Button>
+        <Button onClick={handleLoginModal}>Log In</Button>
+        <Modal 
+        open={isLoginOpen}
+        onCancel={handleLoginModal}
+        footer={null}
+        width={300}
+        maskStyle={{
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+        }}>
+          <AuthModal/>
+        </Modal>
       </div>
     </div>
   );
