@@ -40,6 +40,8 @@ function AuthPage() {
         </div>
         <p>Moments That Matter, Shared Forever</p>
         <Button onClick={handleAuth} icon={<GoogleOutlined style={{color: "red"}}/>  }>Continue with Google</Button>
+        <p>OR</p>
+        <Button >Sign In</Button>
       </div>
     </div>
   );
