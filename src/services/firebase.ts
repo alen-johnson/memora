@@ -4,13 +4,16 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
-const API_KEY = "AIzaSyB9XaQI7p5Y0AcjpLDqa8nW2E_CGlrbi2U";
-const AUTH_DOMAIN = "vibesnap-service.firebaseapp.com";
-const PROJECT_ID = "vibesnap-service";
-const STORAGE_BUCKET = "vibesnap-service.firebasestorage.app";
-const MESSAGING_SENDER_ID = "4303700179";
-const APP_ID = "1:4303700179:web:5e85a233de9f83274ed426";
-const MEASUREMENT_ID = "G-FL52FYGSLN";
+
+console.log(process.env.REACT_APP_FIREBASE_API_KEY);
+
+const API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
+const AUTH_DOMAIN = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
+const PROJECT_ID = process.env.REACT_APP_FIREBASE_PROJECT_ID;
+const STORAGE_BUCKET = process.env.REACT_APP_FIREBASE_STORAGE_BUCKET;
+const MESSAGING_SENDER_ID = process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID;
+const APP_ID = process.env.REACT_APP_FIREBASE_APP_ID;
+const MEASUREMENT_ID = process.env.REACT_APP_FIREBASE_MEASUREMENT_ID;
 
 const firebaseConfig = {
   apiKey: API_KEY,
