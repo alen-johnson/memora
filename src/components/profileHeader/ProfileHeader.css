@@ -13,7 +13,7 @@
 .profile__header-btn1 {
   position: fixed;
   top: 15px;
-  left: 1000px;
+  left: 1200px;
   z-index: 3;
   width: 160px;
   border-radius: 20px;
@@ -22,7 +22,7 @@
 .profile__header-logoutbtn {
   position: fixed;
   top: 15px;
-  left: 1000px;
+  left: 1200px;
   z-index: 3;
   width: 160px;
   border-radius: 20px;
@@ -66,3 +66,60 @@
   z-index: 3;
 }
 
+@media screen and (max-width: 1270px) {
+  .profile__header-btn1 {
+
+  left: 1000px;
+}
+
+.profile__header-logoutbtn {
+  left: 1000px;
+
+}
+}
+@media screen and (max-width: 1070px) {
+  .profile__header-btn1 {
+
+  left: 800px;
+}
+
+.profile__header-logoutbtn {
+  left: 800px;
+
+}
+}
+
+@media screen and (max-width: 970px) {
+  .profile__header-btn1 {
+
+  left: 600px;
+}
+
+.profile__header-logoutbtn {
+  left: 600px;
+
+}
+}
+
+@media screen and (max-width: 780px) {
+  .profile__header-btn1 {
+
+  left: 400px;
+}
+
+.profile__header-logoutbtn {
+  left: 400px;
+
+}
+}
+@media screen and (max-width: 580px) {
+  .profile__header-btn1 {
+
+  left: 240px;
+}
+
+.profile__header-logoutbtn {
+  left: 240px;
+
+}
+}
