@@ -1,16 +1,22 @@
 import { auth, db } from "../services/firebase";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { setDoc, doc, collection, query, where, getDocs } from "firebase/firestore";
+import {
+  setDoc,
+  doc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import useShowMessage from "./useShowMessage";
 import useAuthStore from "../store/authStore";
 
 const useSignUpWithEmailAndPassword = () => {
-
   //@ts-ignore
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const { showError } = useShowMessage();
-  const loginUser = useAuthStore(state => state.login);
+  const loginUser = useAuthStore((state) => state.login);
 
   const signup = async (inputs: {
     email: string;
@@ -28,12 +34,12 @@ const useSignUpWithEmailAndPassword = () => {
       return;
     }
     const usersRef = collection(db, "users");
-    const q = query( usersRef, where("username", "==", inputs.username))
-    const profSnap = await getDocs(q)
-    
-    if(!profSnap.empty){
-      showError("Username already exists")
-      return
+    const q = query(usersRef, where("username", "==", inputs.username));
+    const profSnap = await getDocs(q);
+
+    if (!profSnap.empty) {
+      showError("Username already exists");
+      return;
     }
 
     try {
@@ -43,7 +49,7 @@ const useSignUpWithEmailAndPassword = () => {
       );
       if (!newUser && error) {
         const errorMessage = error?.message || "Something went wrong";
-        showError( errorMessage);
+        showError(errorMessage);
         return;
       }
 
@@ -55,6 +61,7 @@ const useSignUpWithEmailAndPassword = () => {
           fullname: inputs.fullname,
           bio: "",
           profilePicURL: "",
+          coverPicUrl: "",
           followers: [],
           following: [],
           createdAt: Date.now(),
@@ -64,6 +71,8 @@ const useSignUpWithEmailAndPassword = () => {
         localStorage.setItem("user-info", JSON.stringify(userDoc));
         loginUser(userDoc);
       }
+
+      console.log("user created")
     } catch (error) {
       if (error instanceof Error) {
         showError("Error" + error.message);

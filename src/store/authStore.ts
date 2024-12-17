@@ -12,13 +12,14 @@ interface AuthState {
 export interface User {
   uid: string;
   email: string;
-  username: string,
-  fullname: string,
-  bio: string,
-  profilePicURL:string,
-  followers: string[],
-  following: string[],
-  createdAt: number,
+  username: string;
+  fullname: string;
+  bio: string;
+  profilePicURL: string;
+  coverPicUrl: string;
+  followers: string[];
+  following: string[];
+  createdAt: number;
 }
 
 

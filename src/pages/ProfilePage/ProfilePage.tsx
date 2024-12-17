@@ -1,12 +1,13 @@
 import { ArrowLeftOutlined, PlusOutlined } from "@ant-design/icons";
 import "./ProfilePage.css";
-import { cover, profile } from "../../assets/imageIndex";
 import { Button, FloatButton, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import useLogout from "../../hooks/useLogout";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../services/firebase";
+import useAuthStore from "../../store/authStore";
+import { profile } from "../../assets/imageIndex";
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -22,6 +23,10 @@ function ProfilePage() {
   const arrowClick = () => {
     navigate("/");
   };
+
+  const profileimg = authUser?.profilePicURL && authUser.profilePicURL !== "" 
+  ? authUser.profilePicURL 
+  : profile;
 
   return (
     <div className="profile">
@@ -48,8 +53,8 @@ function ProfilePage() {
           </Button>
         )}
 
-        <img src={cover} alt="cover" className="profile__header-cover" />
-        <img src={profile} alt="Profile" className="profile__header-dp" />
+        <img src={authUser?.coverPicUrl} alt="cover" className="profile__header-cover" />
+        <img src={profileimg} alt="Profile" className="profile__header-dp" />
 
         {user && (
           <Button className="profile__header-btn2">Edit Profile</Button>
