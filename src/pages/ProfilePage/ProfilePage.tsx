@@ -1,18 +1,20 @@
 import { ArrowLeftOutlined, PlusOutlined } from "@ant-design/icons";
 import "./ProfilePage.css";
-import { cover, profile } from "../../assets/imageIndex";
+import { cover} from "../../assets/imageIndex";
 import { Button, FloatButton, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import useLogout from "../../hooks/useLogout";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../services/firebase";
+import useAuthStore from "../../store/authStore";
 
 function ProfilePage() {
   const navigate = useNavigate();
   const { handleLogout, isLoggingOut } = useLogout();
   const [isOpen, setIsOpen] = useState(false);
   const [user] = useAuthState(auth);
+  const authUser = useAuthStore((state) => state.user)
 
   const handleLogoutAndNavigate = async () => {
     await handleLogout();
@@ -49,7 +51,7 @@ function ProfilePage() {
         )}
 
         <img src={cover} alt="cover" className="profile__header-cover" />
-        <img src={profile} alt="Profile" className="profile__header-dp" />
+        <img src={authUser?.profilePicURL} alt="Profile" className="profile__header-dp" />
 
         {user && (
           <Button className="profile__header-btn2">Edit Profile</Button>
@@ -66,9 +68,9 @@ function ProfilePage() {
         </div>
       </div>
       <div className="profile__bio">
-        <h2>Jane Doe</h2>
+        <h2>{authUser?.fullname}</h2>
         <p>
-          Lorem ipsum dolor sit amet explicabo rem quas, maxime ad esse dolori
+{authUser?.bio}
         </p>
       </div>
       <div className="profile__posts">

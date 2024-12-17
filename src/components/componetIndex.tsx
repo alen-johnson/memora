@@ -6,6 +6,5 @@ export { default as Notifications } from "./notifications/Notification";
 export { default as LikeButton } from "./likeButton/LikeButton";
 export { default as ShareModal } from "./shareModal/ShareModal";
 export { default as RadioNav } from "./radioNav/RadioNav";
-export {default as GoogleModal} from  "./googleModal/GoogleModal"
 export {default as LoginModal} from  "./authModal/LoginModal"
 export {default as AuthModal} from './authModal/AuthModal'

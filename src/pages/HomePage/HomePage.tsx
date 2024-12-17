@@ -46,9 +46,10 @@ function HomePage() {
     navigate(`/${authUser?.username}`);
   };
 
-  const profileimg = authUser?.profilePicURL
-    ? authUser?.profilePicURL
-    : profile;
+
+const profileimg = authUser?.profilePicURL && authUser.profilePicURL !== "" 
+  ? authUser.profilePicURL 
+  : profile;
 
   return (
     <div className="home">
