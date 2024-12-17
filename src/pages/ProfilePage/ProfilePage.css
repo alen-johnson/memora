@@ -13,6 +13,23 @@
   justify-content: center;
 }
 
+  .profile__header-btn1 {
+    position: fixed; 
+    top: 15px;      
+    left: 1000px;      
+    z-index: 3;    
+    width: 160px;
+    border-radius: 20px;
+  }
+  .profile__header-logoutbtn{
+    position: fixed; 
+    top: 20px;      
+    left: 1000px;      
+    z-index: 3;    
+    width: 160px;
+    border-radius: 20px;
+  }
+  
 .profile__header-cover {
   position: absolute;
   top: 0;
@@ -34,7 +51,7 @@
   z-index: 2;
 }
 
-.profile__header .ant-btn {
+.profile__header-btn2{
   position: absolute;
   bottom: -40px;
   left: 180px;
@@ -114,9 +131,57 @@
     color: #333;
   }
   
-
+ 
   @media (min-width: 780px) {
     .profile__friends {
       display: block; 
     }
+    .profile__header-btn1{
+      left: 700px
+    }
+    .profile__header-logoutbtn{
+      left: 700px
+    }
   }
+  @media screen and (max-width: 1400px) {
+    .profile__header-btn1{
+      left: 900px
+    }
+    .profile__header-logoutbtn{
+      left: 900px
+    }
+  }
+
+  @media screen and (max-width: 1000px){
+    .profile__header-btn1{
+      left: 500px
+    }
+    .profile__header-logoutbtn{
+      left: 500px
+    }
+  }
+
+  @media screen and (max-width: 750px){
+    .profile__header-btn1{
+      left: 300px
+    }
+    .profile__header-logoutbtn{
+      left: 300px
+    }
+  }
+
+  @media screen and (max-width: 560px){
+    .profile__header-btn2{
+      width: 220px;
+      left: 220px;
+    }
+    .profile__header-btn1{
+      width:140px;
+      left: 280px
+    }
+    .profile__header-logoutbtn{
+
+    width:140px;
+      left: 280px
+  }
+}

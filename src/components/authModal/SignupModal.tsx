@@ -1,18 +1,32 @@
-import React, { useState } from "react";
+import React, {
+  //  useEffect,
+    useState } from "react";
 import "./AuthModal.css";
+import useSignUpWithEmailAndPassword from "../../hooks/useSignUpWithEmailAndPassword";
+import { Button } from "antd";
+import useShowMessage from "../../hooks/useShowMessage";
 
 function SignupModal() {
   const [inputs, setInputs] = useState({
-    fullname: "",
-    username: "",
     email: "",
     password: "",
+    username: "",
+    fullname: "",
   });
-  
+  //@ts-ignore
+  const {loading, error, signup} = useSignUpWithEmailAndPassword()
+  //@ts-ignore
+  const {showError} = useShowMessage();
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
   };
+
+  // useEffect(() => {
+  //   if (error) {
+  //     showError(error.message || "An unexpected error occurred");
+  //   }
+  // }, [error]);
   return (
     <div className="login">
       <div className="login__card">
@@ -102,7 +116,7 @@ function SignupModal() {
               }}
             />
           </div>
-          <button className="login__card-title-btn">Sign Up</button>
+          <Button loading={loading} onClick={()=> signup(inputs)}className="login__card-title-btn">Sign Up</Button>
         </form>
       </div>
     </div>

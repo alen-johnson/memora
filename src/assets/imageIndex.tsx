@@ -8,7 +8,7 @@ export { default as img7 } from "./img7.jpeg";
 export { default as img8 } from "./img8.jpeg";
 export { default as img9 } from "./img9.jpeg";
 export { default as logo } from "./logo.png";
-export { default as profile } from "./woman.png";
+export { default as profile } from "./profile.jpg";
 export { default as discord } from "./disc.png";
 export { default as facebook } from "./fb.png";
 export { default as instagram } from "./ig.png";

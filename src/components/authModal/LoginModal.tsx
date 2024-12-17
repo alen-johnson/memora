@@ -1,20 +1,36 @@
-import { useState } from "react";
+//@ts-ignore
+import { useEffect, useState } from "react";
 import "./AuthModal.css";
-import SignupModal from "./SignupModal"; // Import SignupModal
+import SignupModal from "./SignupModal";
+import { Button } from "antd";
+import useLogin from "../../hooks/useLogin";
+import useShowMessage from "../../hooks/useShowMessage";
 
 function LoginModal() {
-  const [isLogin, setIsLogin] = useState(true); // state to toggle between login and signup modals
+  const [isLogin, setIsLogin] = useState(true);
+  //@ts-ignore
+  const { loading, error, login } = useLogin();
+  //@ts-ignore
+
+  const { showError } = useShowMessage();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   //@ts-ignore
   const toggleForm = () => {
-    setIsLogin((prevState) => !prevState); // toggle the form
+    setIsLogin((prevState) => !prevState);
   };
 
-  // Handle form submission for login
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Add Firebase login logic here
+    login({ email, password });
   };
+
+  // useEffect(() => {
+  //     if (error) {
+  //       showError( "An unexpected error occurred");
+  //     }
+  //   }, [error]);
 
   return (
     <div className="login">
@@ -38,6 +54,8 @@ function LoginModal() {
               className="input-field"
               name="email"
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)} 
             />
           </div>
           <div className="login__card-title-field">
@@ -55,13 +73,19 @@ function LoginModal() {
               className="input-field"
               name="password"
               type="password"
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button className="login__card-title-btn">
+          <Button
+            onClick={handleLogin}
+            className="login__card-title-btn"
+            type="primary"
+          >
             {isLogin ? "Login" : "Sign Up"}
-          </button>
+          </Button>
         </form>
-        {/* Render SignupModal if isLogin is false */}
+
         {!isLogin && <SignupModal />}
       </div>
     </div>
