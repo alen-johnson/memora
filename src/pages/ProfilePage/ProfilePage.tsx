@@ -24,6 +24,9 @@ function ProfilePage() {
   const arrowClick = () => {
     navigate("/");
   };
+  const handleEdit = () => {
+    navigate(`/edit/${authUser?.username}`);
+  }
     useEffect(() => {
       console.log(authUser)
     },[authUser])
@@ -38,7 +41,7 @@ function ProfilePage() {
         isLoggingOut={isLoggingOut}
       />
       <div className='profile__head'>
-      <Button  className='profile__head-edtbtn'>Edit Profile</Button>
+      <Button  onClick={handleEdit} className='profile__head-edtbtn' >Edit Profile</Button>
       </div>
       <div className="profile__bio">
         <h2>{authUser?.fullname}</h2>

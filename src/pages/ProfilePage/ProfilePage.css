@@ -80,27 +80,3 @@
   }
 }
 
-@media screen and (max-width: 750px) {
-  .profile__header-btn1 {
-    left: 300px;
-  }
-  .profile__header-logoutbtn {
-    left: 300px;
-  }
-}
-
-@media screen and (max-width: 560px) {
-  .profile__header-btn2 {
-    width: 220px;
-    left: 220px;
-  }
-  .profile__header-btn1 {
-    width: 140px;
-    left: 280px;
-  }
-  .profile__header-logoutbtn {
-    width: 140px;
-    left: 280px;
-  }
- 
-}
