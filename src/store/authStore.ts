@@ -14,6 +14,7 @@ export interface User {
   fullname: string;
   bio: string;
   profilePicURL: string;
+  coverPicUrl: string;
   followers: string[];
   following: string[];
   createdAt: number;

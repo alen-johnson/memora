@@ -13,56 +13,58 @@ import {
 } from "../../assets/imageIndex";
 import "./Authpage.css";
 import { GoogleOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { AuthModal } from "../../components/componetIndex";
 import useShowMessage from "../../hooks/useShowMessage";
 import { auth, db } from "../../services/firebase";
-import useAuthStore from "../../store/authStore";
+import useAuthStore, { User } from "../../store/authStore";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 
 function AuthPage() {
-  const navigate = useNavigate();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [signInWithGoogle] = useSignInWithGoogle(auth);
+  const { showError } = useShowMessage();
+  const loginUser = useAuthStore((state) => state.login);
 
   const handleLoginModal = () => {
     setIsLoginOpen(!isLoginOpen);
   };
-  // @ts-ignore
-  const handleAuth = () => {
-    navigate("/");
-  };
-  const [signInWithGoogle, error] = useSignInWithGoogle(auth);
-  const { showError } = useShowMessage();
-  const loginUser = useAuthStore((state) => state.login);
 
   const handleGoogleAuth = async () => {
     try {
       const newUser = await signInWithGoogle();
-      if (!newUser && error) {
-        if (error instanceof Error) {
-          showError("Error" + error.message);
+
+      if (newUser?.user?.uid) {
+        const userRef = doc(db, "users", newUser.user.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+          // login
+          const userDoc = userSnap.data() as User;
+          localStorage.setItem("user-info", JSON.stringify(userDoc));
+          loginUser(userDoc);
         } else {
-          showError("Error" + "An unknown error occurred");
+          const userDoc: User = {
+            uid: newUser.user.uid,
+            email: newUser.user.email ?? "",
+            username: newUser.user.email ? newUser.user.email.split("@")[0] : "",
+            fullname: newUser.user.displayName ?? "",
+            bio: "",
+            profilePicURL: newUser.user.photoURL ?? "",
+            coverPicUrl: "",
+            followers: [],
+            following: [],
+            createdAt: Date.now(),
+          };
+
+          console.log(userDoc);
+          await setDoc(userRef, userDoc);
+          localStorage.setItem("user-info", JSON.stringify(userDoc));
+          loginUser(userDoc);
         }
-      }
-      if (newUser) {
-        const userDoc = {
-          uid: newUser.user.uid,
-          email: newUser.user.email ?? "",
-          username: newUser.user.email ? newUser.user.email.split("@")[0] : "",
-          fullname: newUser.user.displayName ?? "",
-          bio: "",
-          profilePicURL: newUser.user.photoURL ?? "",
-          followers: [],
-          following: [],
-          createdAt: Date.now(),
-        };
-        console.log(userDoc);
-        await setDoc(doc(db, "users", newUser.user.uid), userDoc);
-        localStorage.setItem("user-info", JSON.stringify(userDoc));
-        loginUser(userDoc);
+      } else {
+        showError("Google authentication failed: User data is undefined.");
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -72,6 +74,7 @@ function AuthPage() {
       }
     }
   };
+
   return (
     <div className="auth">
       <div className="auth__images">
