@@ -5,6 +5,7 @@
 .feed__radionav{
   display: flex;
   width:90%;
+  height: 50px;
   align-items: center;
   justify-content: space-between;
 }
@@ -15,7 +16,7 @@
   background-color: blanchedalmond;
   max-width: 460px;
   border-radius: 40px;
-  margin: 15px;
+  margin: 20px;
 }
 
 .feed__header {
