@@ -24,15 +24,15 @@ const useEditProfile = () => {
     profileFile: string | ArrayBuffer | null,
     coverFile: string | ArrayBuffer | null
   ) => {
-    if (isUpdating || !authUser) return; // Fix: Remove extra `!isUpdating`
+    if (isUpdating || !authUser) return; 
     setIsUpdating(true);
   
     const profileStorageRef = ref(storage, `profilePics/${authUser.uid}`);
     const coverStorageRef = ref(storage, `coverPics/${authUser.uid}`);
     const userDocRef = doc(db, "users", authUser.uid);
   
-    let profileUrl = authUser.profilePicURL || ""; // Fallback to current URL or empty string
-    let coverUrl = authUser.coverPicURL || ""; // Fallback to current URL or empty string
+    let profileUrl = authUser.profilePicURL || ""; 
+    let coverUrl = authUser.coverPicURL || ""; 
   
     try {
       if (profileFile && typeof profileFile === "string") {
