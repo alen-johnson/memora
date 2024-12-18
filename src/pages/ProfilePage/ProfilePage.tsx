@@ -3,7 +3,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Button, FloatButton, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import useLogout from "../../hooks/useLogout";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../services/firebase";
 import useAuthStore from "../../store/authStore";
@@ -28,18 +28,14 @@ function ProfilePage() {
   const handleEdit = () => {
     navigate(`/edit/${authUser?.username}`);
   }
-    useEffect(() => {
-      console.log(authUser)
-    },[authUser])
 
-    const coverimg = authUser?.coverPicUrl? authUser.coverPicUrl: cover
+    const coverimg = authUser?.coverPicURL? authUser.coverPicURL: cover
     const profileimg = authUser?.profilePicURL? authUser.profilePicURL: profile
-
   return (
     <div className="profile">
       <ProfileHeader
         text="Go Back"
-        showButtons={user !== null} // Conditionally render buttons based on user state
+        showButtons={user !== null} 
         onArrowClick={arrowClick}
         onLogoutClick={() => setIsOpen(!isOpen)}
         isLoggingOut={isLoggingOut}
