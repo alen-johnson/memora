@@ -62,8 +62,9 @@ margin: 0 1rem;
   margin: 3rem 0 0 0 ;
 }
 
-.home__body-new{
+.home__body-side{
   margin-top: 5rem;
+  width: 20vw;
 }
 
 .navbar-menu {
@@ -103,7 +104,7 @@ margin: 0 1rem;
 }
 
 @media screen and (max-width: 770px) {
-  .home__body-new {
+  .home__body-side {
     display: none;
   }
 }

@@ -90,6 +90,8 @@ function ProfilePage() {
             className="profile__head-edtbtn"
             loading={isUpdating}
           >
+
+            {/* need some fix here*/}
             {!isFollowing ? "Follow" : "Unfollow"}
           </Button>
         )}
