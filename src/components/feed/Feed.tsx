@@ -1,5 +1,5 @@
 import { Button, Modal } from "antd";
-import { LikeButton, ShareModal } from "../componetIndex";
+import { LikeButton, RadioNav, ShareModal } from "../componetIndex";
 import "./Feed.css";
 import { ShareAltOutlined } from "@ant-design/icons";
 
@@ -52,7 +52,10 @@ function Feed() {
   };
   return (
     <div className="feed-wrapper">
+      <div className="feed__radionav">
       <h2>Feeds</h2>
+      <RadioNav/>
+      </div>
       {feedData.map((feed) => (
         <div key={feed.id} className="feed">
           <div className="feed__header">

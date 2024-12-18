@@ -1,0 +1,68 @@
+.profile__header {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile__header-arrow{
+  z-index: 4;
+  color: #000;
+}
+.profile__header-btn1 {
+  position: fixed;
+  top: 15px;
+right: 20px;
+  z-index: 3;
+  width: 160px;
+  border-radius: 20px;
+}
+
+.profile__header-logoutbtn {
+  position: fixed;
+  top: 15px;
+right: 20px;
+  z-index: 3;
+  width: 160px;
+  border-radius: 20px;
+}
+
+.profile__header-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.profile__header-dp {
+  position: absolute;
+  bottom: -10px;
+  left: 20px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  /* border: 4px solid #fff; */
+  z-index: 2;
+}
+
+.profile__header-text {
+  position: absolute;
+  top: 20px;
+  left: 60px;
+  font-size: 18px;
+  color: white;
+}
+
+.profile__header .anticon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  color: #fff;
+  z-index: 3;
+}
+
