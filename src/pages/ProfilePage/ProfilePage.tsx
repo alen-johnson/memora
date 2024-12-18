@@ -8,6 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../services/firebase";
 import useAuthStore from "../../store/authStore";
 import {ProfileHeader} from "../../components/componetIndex";  
+import { cover, profile } from '../../assets/imageIndex';
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -31,6 +32,9 @@ function ProfilePage() {
       console.log(authUser)
     },[authUser])
 
+    const coverimg = authUser?.coverPicUrl? authUser.coverPicUrl: cover
+    const profileimg = authUser?.profilePicURL? authUser.profilePicURL: profile
+
   return (
     <div className="profile">
       <ProfileHeader
@@ -39,6 +43,8 @@ function ProfilePage() {
         onArrowClick={arrowClick}
         onLogoutClick={() => setIsOpen(!isOpen)}
         isLoggingOut={isLoggingOut}
+        coverImage={coverimg}
+        profileImage={profileimg}
       />
       <div className='profile__head'>
       <Button  onClick={handleEdit} className='profile__head-edtbtn' >Edit Profile</Button>
