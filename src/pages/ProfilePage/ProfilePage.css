@@ -8,12 +8,15 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  position: relative;
 }
 .profile__head-edtbtn{
-  margin-left: auto;
-  width: 300px;
-  margin-top: 10px;
-  margin-right: 1rem;
+  position: absolute;
+
+  width: 280px;
+ right: 10px;
+ top: -40px;
+
 }
 
 
@@ -79,4 +82,5 @@
     display: block;
   }
 }
+
 

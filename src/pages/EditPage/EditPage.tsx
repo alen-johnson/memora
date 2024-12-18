@@ -2,27 +2,130 @@ import { useNavigate } from "react-router-dom";
 import "./EditPage.css";
 import useAuthStore from "../../store/authStore";
 import { ProfileHeader } from "../../components/componetIndex";
-import { auth } from "../../services/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { EditFilled } from "@ant-design/icons";
+import { Button, Input } from "antd";
+import { useRef, useState, useEffect } from "react";
+import usePreviewImg from "../../hooks/usePreviewImg";
+import { profile, cover } from '../../assets/imageIndex';
+
 
 function EditPage() {
   const authUser = useAuthStore((state) => state.user);
-  const [user] = useAuthState(auth);
+  const { profileFile, coverFile, handleImageChange } = usePreviewImg();
+  const [inputs, setInputs] = useState({
+    fullname: authUser?.fullname || "",
+    username: authUser?.username || "",
+    bio: authUser?.bio || "",
+  });
+
+  const [profileImg, setProfileImg] = useState(authUser?.profilePicURL || profile);
+  const [coverImg, setCoverImg] = useState(authUser?.coverPicUrl || cover);
 
   const navigate = useNavigate();
+  const fileRefProfile = useRef<HTMLInputElement | null>(null);
+  const fileRefCover = useRef<HTMLInputElement | null>(null);
+
+
+  useEffect(() => {
+    if (profileFile && typeof profileFile === "string") {
+      setProfileImg(profileFile); 
+    }
+  }, [profileFile]);
+
+  useEffect(() => {
+    if (coverFile && typeof coverFile === "string") {
+      setCoverImg(coverFile); 
+    }
+  }, [coverFile]);
 
   const arrowClick = () => {
     navigate(`/${authUser?.username}`);
   };
+
+  const handleSave = () => {
+    console.log("Updated Data:", { inputs });
+    // Logic to save data (e.g., update API or state)
+  };
+
   return (
     <div className="edit">
-      <ProfileHeader
-        text="Go Back"
-        showButtons={user !== null} // Conditionally render buttons based on user state
-        onArrowClick={arrowClick}
-        onLogoutClick={() => {}}
-        isLoggingOut={false}
-      />
+      <div className="edit__header">
+        <ProfileHeader
+          text="Go Back"
+          showButtons={false}
+          onArrowClick={arrowClick}
+          onLogoutClick={() => {}}
+          isLoggingOut={false}
+          profileImage={profileImg}
+          coverImage={coverImg}
+        />
+
+        <EditFilled
+          className="edit__header-btn1"
+          onClick={() => {
+            if (fileRefProfile.current) {
+              fileRefProfile.current.click();
+            }
+          }}
+        />
+        <input type="file" hidden ref={fileRefProfile} onChange={(e) => handleImageChange(e, "profile")} />
+        <EditFilled
+          className="edit__header-btn2"
+          onClick={() => {
+            if (fileRefCover.current) {
+              fileRefCover.current.click();
+            }
+          }}
+        />
+        <input type="file" hidden ref={fileRefCover} onChange={(e) => handleImageChange(e, "cover")} />
+      </div>
+
+      <div className="edit__bio">
+        <div className="edit__bio-field">
+          <p>Name</p>
+          <Input
+            value={inputs.fullname}
+            onChange={(e) => setInputs({ ...inputs, fullname: e.target.value })}
+            variant="borderless"
+          />
+          <div className="edit__bio-underline" />
+        </div>
+
+        <div className="edit__bio-field">
+          <p>Username</p>
+          <Input
+            value={inputs.username}
+            onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
+            variant="borderless"
+          />
+          <div className="edit__bio-underline" />
+        </div>
+
+        <div className="edit__bio-field">
+          <p>Bio</p>
+          <Input.TextArea
+            value={inputs.bio}
+            onChange={(e) => setInputs({ ...inputs, bio: e.target.value })}
+            variant="borderless"
+            autoSize={{ minRows: 3, maxRows: 6 }}
+          />
+          <div className="edit__bio-underline" />
+        </div>
+      </div>
+
+      <div className="edit__btn-container">
+        <Button
+          type="primary"
+          style={{
+            backgroundColor: "black",
+            borderColor: "black",
+            width: "98%",
+          }}
+          onClick={handleSave}
+        >
+          Save
+        </Button>
+      </div>
     </div>
   );
 }
