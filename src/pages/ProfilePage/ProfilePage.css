@@ -3,22 +3,21 @@
   flex-direction: column;
   max-width: 100vw;
 }
-.profile__head{
+.profile__head {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   position: relative;
 }
-.profile__head-edtbtn{
+.profile__head-edtbtn {
   position: absolute;
 
   width: 280px;
- right: 10px;
- top: -40px;
-
+  right: 10px;
+  top: -40px;
+  border-radius: 20px;
 }
-
 
 .profile__bio {
   width: 95%;
@@ -29,7 +28,7 @@
 }
 
 .profile__bio h2 {
-  line-height: .5rem;
+  line-height: 0.5rem;
   font-family: var(--font-primary);
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
@@ -40,10 +39,9 @@
 
 .profile__posts {
   margin: 0 0 0 20px;
-
 }
 
-.profile__posts h4{
+.profile__posts h4 {
   font-family: var(--font-primary);
 }
 
@@ -83,8 +81,7 @@
   }
 }
 
-
-.loading{
+.loading {
   display: flex;
   flex-direction: column;
 }

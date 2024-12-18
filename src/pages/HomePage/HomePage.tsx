@@ -9,6 +9,7 @@ import {
   Friends,
   Navbar,
   Notifications,
+  SuggestedUsers,
 } from "../../components/componetIndex";
 import { useNavigate } from "react-router-dom";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
@@ -97,8 +98,8 @@ const profileimg = authUser?.profilePicURL && authUser.profilePicURL !== ""
         </div>
 
         <FloatButton icon={<PlusOutlined />} type="primary" />
-        <div className="home__body-new">
-          <h4>People You May Know</h4>
+        <div className="home__body-side">
+          <SuggestedUsers/>
         </div>
       </div>
     </div>
