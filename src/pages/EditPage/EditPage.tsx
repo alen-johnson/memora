@@ -7,6 +7,8 @@ import { Button, Input } from "antd";
 import { useRef, useState, useEffect } from "react";
 import usePreviewImg from "../../hooks/usePreviewImg";
 import { profile, cover } from '../../assets/imageIndex';
+import useEditProfile from "../../hooks/useEditProfile";
+import useShowMessage from "../../hooks/useShowMessage";
 
 
 function EditPage() {
@@ -19,9 +21,10 @@ function EditPage() {
   });
 
   const [profileImg, setProfileImg] = useState(authUser?.profilePicURL || profile);
-  const [coverImg, setCoverImg] = useState(authUser?.coverPicUrl || cover);
-
+  const [coverImg, setCoverImg] = useState(authUser?.coverPicURL || cover);
+const {isUpdating, editProfile} = useEditProfile()
   const navigate = useNavigate();
+  const {showError} = useShowMessage();
   const fileRefProfile = useRef<HTMLInputElement | null>(null);
   const fileRefCover = useRef<HTMLInputElement | null>(null);
 
@@ -42,9 +45,20 @@ function EditPage() {
     navigate(`/${authUser?.username}`);
   };
 
-  const handleSave = () => {
-    console.log("Updated Data:", { inputs });
-    // Logic to save data (e.g., update API or state)
+  const handleSave = async() => {
+    try {
+      await editProfile(inputs, profileFile, coverFile )
+
+      setTimeout(() => {
+        navigate(`/${authUser?.username}`);
+      }, 2000);
+    } catch (error) {
+      if (error instanceof Error) {
+        showError("Error" + error.message);
+      } else {
+        showError("Error" + "An unknown error occurred");
+      }
+    }
   };
 
   return (
@@ -122,6 +136,7 @@ function EditPage() {
             width: "98%",
           }}
           onClick={handleSave}
+          loading={isUpdating}
         >
           Save
         </Button>

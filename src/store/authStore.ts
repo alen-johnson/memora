@@ -1,14 +1,5 @@
 import { create } from "zustand";
 
-
-interface AuthState {
-  user: User | null; 
-  login: (user: User) => void;
-  logout: () => void;
-  setUser: (user: User) => void;
-}
-
-
 export interface User {
   uid: string;
   email: string;
@@ -16,11 +7,18 @@ export interface User {
   fullname: string;
   bio: string;
   profilePicURL: string;
-  coverPicUrl: string;
+  coverPicURL: string;
   followers: string[];
   following: string[];
   createdAt: number;
 }
+interface AuthState {
+  user: User | null;
+  login: (user: User) => void;
+  logout: () => void;
+  setUser: (user: User) => void;
+}
+
 
 
 const useAuthStore = create<AuthState>((set) => ({

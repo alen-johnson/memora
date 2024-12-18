@@ -44,7 +44,6 @@ function AuthPage() {
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
-          // login
           const userDoc = userSnap.data() as User;
           localStorage.setItem("user-info", JSON.stringify(userDoc));
           loginUser(userDoc);
@@ -99,7 +98,7 @@ function AuthPage() {
         </div>
         <p>Moments That Matter, Shared Forever</p>
         <Button
-          onClick={handleGoogleModal}
+          onClick={handleGoogleAuth}
           icon={<GoogleOutlined style={{ color: "red" }} />}
         >
           Continue with Google
@@ -114,7 +113,6 @@ function AuthPage() {
             WebkitBackdropFilter: "blur(10px)",
           }}
         >
-          <GoogleModal />
         </Modal>
         <p>OR</p>
         <Button onClick={handleLoginModal}>Log In</Button>
