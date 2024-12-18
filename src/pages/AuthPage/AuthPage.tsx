@@ -40,7 +40,6 @@ function AuthPage() {
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
-          // login
           const userDoc = userSnap.data() as User;
           localStorage.setItem("user-info", JSON.stringify(userDoc));
           loginUser(userDoc);
@@ -52,7 +51,7 @@ function AuthPage() {
             fullname: newUser.user.displayName ?? "",
             bio: "",
             profilePicURL: newUser.user.photoURL ?? "",
-            coverPicUrl: "",
+            coverPicURL: "",
             followers: [],
             following: [],
             createdAt: Date.now(),

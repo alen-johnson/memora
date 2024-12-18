@@ -1,5 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
-import { AuthPage, HomePage, ProfilePage } from "./pages/pagesIndex"
+import { AuthPage, EditPage, HomePage, ProfilePage } from "./pages/pagesIndex"
 import useAuthStore from "./store/authStore"
 
 
@@ -11,7 +11,8 @@ function App() {
      <Routes>
       <Route path="/" element={authUser? <HomePage/>: <Navigate to= "/auth" />}/>
       <Route path="/auth" element={!authUser ? <AuthPage/>  : <Navigate to= "/" />}/>
-      <Route path="/:username" element={<ProfilePage/>}/>
+      <Route path="/:username" element={authUser? <ProfilePage/> : <Navigate to= "/auth" />}/>
+      <Route path="/edit/:username" element= {authUser? <EditPage/> : <Navigate to= "/auth" />} />
      </Routes>
      </BrowserRouter>
     </>
