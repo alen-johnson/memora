@@ -28,7 +28,7 @@ const useCreatePost = () => {
       caption: caption,
       createdAt: Date.now(),
       createdBy: authUser?.uid,
-      picURL: "",
+      imgUrl: "",
     };
 
     try {
@@ -42,7 +42,7 @@ const useCreatePost = () => {
       const downloadURL = await getDownloadURL(imgRef);
       await updateDoc(postDocRef, { imgUrl: downloadURL });
 
-      newPost.picURL = downloadURL;
+      newPost.imgUrl = downloadURL;
 
       createPost({ ...newPost, id: postDocRef.id });
 

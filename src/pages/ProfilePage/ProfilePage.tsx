@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../services/firebase";
 import useAuthStore from "../../store/authStore";
-import { ProfileHeader } from "../../components/componetIndex";
+import { ProfileHeader, ProfilePost } from "../../components/componetIndex";
 import { cover, profile } from "../../assets/imageIndex";
 import useGetProfileByUsername from "../../hooks/useGetProfileByUsername";
 import useFollowUser from "../../hooks/useFollowUser";
@@ -21,9 +21,12 @@ function ProfilePage() {
   const authUser = useAuthStore((state) => state.user);
 
   const { userProfile, isloading } = useGetProfileByUsername(username || "");
-  const { isFollowing, isUpdating, handleFollowUser } = useFollowUser(userProfile?.uid ?? "");
+  const { isFollowing, isUpdating, handleFollowUser } = useFollowUser(
+    userProfile?.uid ?? ""
+  );
 
   const isOwnProfile = authUser?.username === username;
+
 
   const handleLogoutAndNavigate = async () => {
     await handleLogout();
@@ -90,27 +93,27 @@ function ProfilePage() {
             className="profile__head-edtbtn"
             loading={isUpdating}
           >
-
             {/* need some fix here*/}
             {!isFollowing ? "Follow" : "Unfollow"}
           </Button>
         )}
       </div>
+      <Modal
+        open={isOpen}
+        onOk={handleLogoutAndNavigate}
+        onCancel={() => setIsOpen(!isOpen)}
+        title="Are you sure you want to log out?"
+      />
       <div className="profile__bio">
         <h2>{userProfile.fullname}</h2>
         <p>{userProfile.bio}</p>
       </div>
-      <div className="profile__posts">
-        <h4>My Posts</h4>
-
-        <Modal
-          open={isOpen}
-          onOk={handleLogoutAndNavigate}
-          onCancel={() => setIsOpen(!isOpen)}
-          title="Are you sure you want to log out?"
-        />
+      <div className="profile__post">
+      <h4>Posts</h4>
+        
+        <ProfilePost/>
       </div>
-      {isOwnProfile && <FloatButton icon={<PlusOutlined />} type="primary" />}
+      {isOwnProfile && <FloatButton icon={<PlusOutlined />} type="primary" onClick={() =>navigate('/post')} />}
     </div>
   );
 }

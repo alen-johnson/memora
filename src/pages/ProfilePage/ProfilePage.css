@@ -21,8 +21,7 @@
 
 .profile__bio {
   width: 95%;
-  height: 150px;
-  margin: 2rem 0 20px 20px;
+  margin: 1rem 0 0 20px;
   display: flex;
   flex-direction: column;
 }
@@ -37,12 +36,13 @@
   font-family: var(--font-secondary);
 }
 
-.profile__posts {
+.profile__post {
   margin: 0 0 0 20px;
 }
 
-.profile__posts h4 {
+.profile__post h4 {
   font-family: var(--font-primary);
+  line-height: .5rem;
 }
 
 .profile__friends {
@@ -84,4 +84,15 @@
 .loading {
   display: flex;
   flex-direction: column;
+}
+
+@media screen and (max-width: 470px) {
+  .profile__head-edtbtn{
+    width: 200px;
+  }
+}
+@media screen and (max-width: 390px) {
+  .profile__head-edtbtn{
+    width: 150px;
+  }
 }
