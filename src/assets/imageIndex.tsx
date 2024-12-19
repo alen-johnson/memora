@@ -18,3 +18,4 @@ export { default as telegram } from "./tele.png";
 export { default as twitter } from "./tweet.png";
 export { default as whatsapp } from "./whatsapp.png";
 export {default as cover} from "./cover.jpeg"
+export {default as post} from "./post.png"

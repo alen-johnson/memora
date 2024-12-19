@@ -97,7 +97,7 @@ const profileimg = authUser?.profilePicURL && authUser.profilePicURL !== ""
           {tab === "Notifications" && <Notifications />}
         </div>
 
-        <FloatButton icon={<PlusOutlined />} type="primary" />
+        <FloatButton icon={<PlusOutlined />} type="primary"  onClick={() =>navigate('/post')}/>
         <div className="home__body-side">
           <SuggestedUsers/>
         </div>

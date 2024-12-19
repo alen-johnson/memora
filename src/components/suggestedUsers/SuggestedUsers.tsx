@@ -1,4 +1,4 @@
-import { Skeleton } from "antd";
+
 import useGetSuggestedUsers from "../../hooks/useGetSuggestedUsers";
 import "./SuggestedUsers.css";
 import useAuthStore, { User } from "../../store/authStore";
@@ -13,11 +13,7 @@ function SuggestedUsers() {
   const authUser = useAuthStore((state) => state.user)
 
   if (isLoading) {
-    return (
-      <>
-        <Skeleton />
-      </>
-    );
+    return null
   }
 
 const handleFollowClick = (userId: string) => {
