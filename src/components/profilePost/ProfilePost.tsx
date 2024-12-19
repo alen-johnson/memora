@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useGetUserPosts from "../../hooks/useGetUserPosts";
 import "./ProfilePost.css";
 import { Skeleton } from "antd";
+import useUserProfileStore from "../../store/userProfileStore"; 
 
 function ProfilePost() {
   const { isLoading, posts } = useGetUserPosts();
@@ -9,11 +10,14 @@ function ProfilePost() {
     { id: string; imgUrl?: string; caption: string }[]
   >([]);
 
+  const userProfile = useUserProfileStore((state) => state.userProfile);
+
   useEffect(() => {
-    if (posts && posts.length > 0) {
-      setUserPosts(posts);
+    if (posts && posts.length > 0 && userProfile) {
+      const filteredPosts = posts.filter((post) => post.createdBy === userProfile.uid);
+      setUserPosts(filteredPosts);
     }
-  }, [posts]);
+  }, [posts, userProfile]); 
 
   const isVideo = (url: string | undefined) => {
     return (
@@ -24,7 +28,6 @@ function ProfilePost() {
 
   return (
     <div className="profile__posts">
-      {" "}
       {isLoading ? (
         <>
           <Skeleton.Image />

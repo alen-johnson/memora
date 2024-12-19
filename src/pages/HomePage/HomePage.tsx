@@ -16,13 +16,14 @@ import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import useAuthStore from "../../store/authStore";
 
 function HomePage() {
-  const [showText, setShowText] = useState(true);
   const [tab, setTab] = useState("Feed");
   const [toggleMenu, setToggleMenu] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 770);
   const navigate = useNavigate();
 
   const authUser = useAuthStore((state) => state.user);
+  const isWelcomeShown = useAuthStore((state) => state.isWelcomeShown);
+  const setWelcomeShown = useAuthStore((state) => state.setWelcomeShown);
 
   useEffect(() => {
     const handleResize = () => {
@@ -34,9 +35,10 @@ function HomePage() {
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowText(false), 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (authUser && !isWelcomeShown) {
+      setWelcomeShown(true); 
+    }
+  }, [authUser, isWelcomeShown, setWelcomeShown]);
 
   const handleTabChange = (tab: string) => {
     setTab(tab);
@@ -44,13 +46,14 @@ function HomePage() {
   };
 
   const handleProfileClick = () => {
-    navigate(`/${authUser?.username}`);
+    if (authUser) {
+      navigate(`/${authUser.username}`);
+    }
   };
 
-
-const profileimg = authUser?.profilePicURL && authUser.profilePicURL !== "" 
-  ? authUser.profilePicURL 
-  : profile;
+  const profileimg = authUser?.profilePicURL && authUser.profilePicURL !== "" 
+    ? authUser.profilePicURL 
+    : profile;
 
   return (
     <div className="home">
@@ -65,10 +68,10 @@ const profileimg = authUser?.profilePicURL && authUser.profilePicURL !== ""
           </div>
         )}
         <div className="home__header-profile-container">
-          {showText && (
+          {authUser && !isWelcomeShown && (
             <div className="header-welcome">
               <p className="header-text">Welcome Back</p>
-              <p className="header-text">{authUser?.fullname}</p>
+              <p className="header-text">{authUser.fullname}</p>
             </div>
           )}
           <img
@@ -97,9 +100,9 @@ const profileimg = authUser?.profilePicURL && authUser.profilePicURL !== ""
           {tab === "Notifications" && <Notifications />}
         </div>
 
-        <FloatButton icon={<PlusOutlined />} type="primary"  onClick={() =>navigate('/post')}/>
+        <FloatButton icon={<PlusOutlined />} type="primary" onClick={() => navigate('/post')} />
         <div className="home__body-side">
-          <SuggestedUsers/>
+          <SuggestedUsers />
         </div>
       </div>
     </div>

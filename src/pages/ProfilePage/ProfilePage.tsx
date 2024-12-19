@@ -19,6 +19,7 @@ function ProfilePage() {
   const [isOpen, setIsOpen] = useState(false);
   const [user] = useAuthState(auth);
   const authUser = useAuthStore((state) => state.user);
+  const setWelcomeShown = useAuthStore((state) => state.setWelcomeShown);
 
   const { userProfile, isloading } = useGetProfileByUsername(username || "");
   const { isFollowing, isUpdating, handleFollowUser } = useFollowUser(
@@ -27,11 +28,14 @@ function ProfilePage() {
 
   const isOwnProfile = authUser?.username === username;
 
-
   const handleLogoutAndNavigate = async () => {
+
+    setWelcomeShown(false);
+    localStorage.setItem("isWelcomeShown", "false");
     await handleLogout();
     navigate("/auth");
   };
+  
 
   const arrowClick = () => {
     navigate("/");

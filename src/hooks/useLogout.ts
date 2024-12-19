@@ -12,6 +12,7 @@ const useLogout = () => {
     try {
       await signOut();
       localStorage.removeItem("user-info");
+      localStorage.removeItem("isWelcomeShown");
       logoutUser();
     } catch (error) {
       if (error instanceof Error) {
