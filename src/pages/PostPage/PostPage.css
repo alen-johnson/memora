@@ -1,7 +1,10 @@
 .post {
   display: flex;
   flex-direction: column;
+}
 
+.post h4{
+  font-family: var(--font-secondary);
 }
 
 .post__img-container {
@@ -17,7 +20,8 @@
 .post__img-box {
   display: flex;
   flex-direction: column;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .post-img {
@@ -25,17 +29,23 @@
   height: 50px;
   opacity: 0.6;
   transition: opacity 0.3s ease-in-out;
+  margin: 0;
 }
 
 .post-drag {
   margin-top: 20px;
   font-size: 18px;
   color: #888;
+  margin: 0;
 }
 
 .post-types {
   margin-top: 5px;
   color: rgba(114, 101, 101, 0.6);
+}
+
+.post-img:hover, .post-drag:hover, .post-types:hover{
+  opacity: 1;
 }
 
 .post__preview-container {
@@ -46,7 +56,7 @@
   gap: 10px;
   min-height: 60vh;
   transition: all 0.3s ease;
-  visibility: hidden; 
+  visibility: hidden;
 }
 
 .post__preview-item {
@@ -55,8 +65,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 150px;
-  height: auto; 
+  width: 250px;
+  height: auto;
   flex-shrink: 0;
 }
 
@@ -76,7 +86,7 @@
 .post-preview {
   width: 100%;
   height: auto;
-  object-fit: contain; 
+  object-fit: contain;
 }
 
 .post__video-container {
@@ -85,7 +95,7 @@
 }
 
 .post__img-container.hidden {
-  display: none; 
+  display: none;
 }
 
 .post__preview-container.hidden {
@@ -93,19 +103,22 @@
 }
 
 .post__preview-container.expanded {
-  visibility: visible; 
+  visibility: visible;
 }
 
 .add-more-btn {
   align-self: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 5px;
 }
 
 .add-more-btn .anticon {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .post-btn {
@@ -122,6 +135,7 @@
 .post-caption {
   font-size: 18px;
   margin-bottom: 10px;
+  font-family: var(--font-secondary);
 }
 
 .hidden {

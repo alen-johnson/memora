@@ -148,15 +148,16 @@ function PostPage() {
         ))}
       </div>
 
-      {fileUrls.length < 4 && (
-        <Button
-          className="add-more-btn"
-          icon={<span className="anticon">+</span>}
-          onClick={addMoreFiles}
-        >
-          Add More
-        </Button>
-      )}
+      {fileUrls.length > 0 && fileUrls.length < 4 && (
+  <Button
+    className="add-more-btn"
+    icon={<span className="anticon">+</span>}
+    onClick={addMoreFiles}
+  >
+    Select More
+  </Button>
+)}
+
 
       <div className="post__caption-container">
         <p className="post-caption">Caption</p>
