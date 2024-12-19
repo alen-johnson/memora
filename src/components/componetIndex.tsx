@@ -9,3 +9,5 @@ export { default as RadioNav } from "./radioNav/RadioNav";
 export {default as LoginModal} from  "./authModal/LoginModal"
 export {default as AuthModal} from './authModal/AuthModal'
 export {default as ProfileHeader} from './profileHeader/ProfileHeader'
+export {default as SuggestedUsers} from './suggestedUsers/SuggestedUsers'
+export {default as ProfilePost} from './profilePost/ProfilePost'

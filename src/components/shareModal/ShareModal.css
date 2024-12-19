@@ -73,6 +73,8 @@
     align-items: center;
     padding: 5px;
     margin: 10px;
+  border-radius: 13px;
+
 }
 
 .share__row3-url p{
@@ -87,7 +89,7 @@
     --button-text-color: #cccccc;
     --button-hover-text-color: #8bb9fe;
     --button-border-radius: 10px;
-    --button-diameter: 36px;
+    --button-diameter: 34px;
     --button-outline-width: 1px;
     --button-outline-color: rgb(141, 141, 141);
 

@@ -1,0 +1,57 @@
+
+.profile__posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 10px;
+
+    width: 90vw;
+    box-sizing: border-box; 
+  }
+  
+
+  .profile__posts-item {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+  }
+  
+
+  .profile__posts-media {
+    max-width: 100%; 
+    max-height: 300px; 
+    border-radius: 8px;
+    object-fit: cover; 
+
+  }
+  
+
+  .profile__posts-item .ant-skeleton-image {
+    height: 200px; 
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+
+  @media (max-width: 600px) {
+    .profile__posts {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 601px) and (max-width: 1024px) {
+    .profile__posts {
+      grid-template-columns: repeat(3, 1fr); 
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    .profile__posts {
+      grid-template-columns: repeat(4, 1fr); 
+    }
+  }
+  
