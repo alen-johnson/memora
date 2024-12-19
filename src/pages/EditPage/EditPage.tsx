@@ -6,10 +6,9 @@ import { EditFilled } from "@ant-design/icons";
 import { Button, Input } from "antd";
 import { useRef, useState, useEffect } from "react";
 import usePreviewImg from "../../hooks/usePreviewImg";
-import { profile, cover } from '../../assets/imageIndex';
+import { profile, cover } from "../../assets/imageIndex";
 import useEditProfile from "../../hooks/useEditProfile";
 import useShowMessage from "../../hooks/useShowMessage";
-
 
 function EditPage() {
   const authUser = useAuthStore((state) => state.user);
@@ -20,24 +19,25 @@ function EditPage() {
     bio: authUser?.bio || "",
   });
 
-  const [profileImg, setProfileImg] = useState(authUser?.profilePicURL || profile);
+  const [profileImg, setProfileImg] = useState(
+    authUser?.profilePicURL || profile
+  );
   const [coverImg, setCoverImg] = useState(authUser?.coverPicURL || cover);
-const {isUpdating, editProfile} = useEditProfile()
+  const { isUpdating, editProfile } = useEditProfile();
   const navigate = useNavigate();
-  const {showError} = useShowMessage();
+  const { showError } = useShowMessage();
   const fileRefProfile = useRef<HTMLInputElement | null>(null);
   const fileRefCover = useRef<HTMLInputElement | null>(null);
 
-
   useEffect(() => {
     if (profileFile && typeof profileFile === "string") {
-      setProfileImg(profileFile); 
+      setProfileImg(profileFile);
     }
   }, [profileFile]);
 
   useEffect(() => {
     if (coverFile && typeof coverFile === "string") {
-      setCoverImg(coverFile); 
+      setCoverImg(coverFile);
     }
   }, [coverFile]);
 
@@ -45,9 +45,9 @@ const {isUpdating, editProfile} = useEditProfile()
     navigate(`/${authUser?.username}`);
   };
 
-  const handleSave = async() => {
+  const handleSave = async () => {
     try {
-      await editProfile(inputs, profileFile, coverFile )
+      await editProfile(inputs, profileFile, coverFile);
 
       setTimeout(() => {
         navigate(`/${authUser?.username}`);
@@ -82,7 +82,12 @@ const {isUpdating, editProfile} = useEditProfile()
             }
           }}
         />
-        <input type="file" hidden ref={fileRefProfile} onChange={(e) => handleImageChange(e, "profile")} />
+        <input
+          type="file"
+          hidden
+          ref={fileRefProfile}
+          onChange={(e) => handleImageChange(e, "profile")}
+        />
         <EditFilled
           className="edit__header-btn2"
           onClick={() => {
@@ -91,7 +96,12 @@ const {isUpdating, editProfile} = useEditProfile()
             }
           }}
         />
-        <input type="file" hidden ref={fileRefCover} onChange={(e) => handleImageChange(e, "cover")} />
+        <input
+          type="file"
+          hidden
+          ref={fileRefCover}
+          onChange={(e) => handleImageChange(e, "cover")}
+        />
       </div>
 
       <div className="edit__bio">
