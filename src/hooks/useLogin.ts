@@ -27,7 +27,6 @@ const useLogin = () => {
 
         if (userData) {
           localStorage.setItem("user-info", JSON.stringify(docSnap.data()));
-          console.log("=====> in try",localStorage.getItem("user-info"));
           loginUser(userData);
         } else {
           showError("Some error occurred while fetching user data.");

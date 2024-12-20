@@ -1,6 +1,11 @@
 import "./LikeButton.css";
 
-function LikeButton() {
+
+interface LikeButtonProps {
+  likes: number;
+}
+
+function LikeButton({likes}:LikeButtonProps) {
   return (
     <div className="heart">
       <div className="heart-container" title="Like">
@@ -35,7 +40,7 @@ function LikeButton() {
           </svg>
         </div>
       </div>
-      <div className="heart-likes">1</div>
+      <div className="heart-likes">{likes}</div>
       
     </div>
   );

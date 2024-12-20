@@ -7,7 +7,7 @@ import useUserProfileStore from "../../store/userProfileStore";
 function ProfilePost() {
   const { isLoading, posts } = useGetUserPosts();
   const [userPosts, setUserPosts] = useState<
-    { id: string; imgUrl?: string; caption: string }[]
+    { id: string; imgUrl?: string; caption: string ; likes:string[] }[]
   >([]);
 
   const userProfile = useUserProfileStore((state) => state.userProfile);
