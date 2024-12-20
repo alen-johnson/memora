@@ -21,10 +21,11 @@ const useGetFeed = () => {
         setPosts([]);
         return;
       }
+      const userAndFollowing = [authUser?.uid, ...(authUser?.following ??  [])]
 
       const q = query(
         collection(db, "posts"),
-        where("createdBy", "in", authUser?.following)
+        where("createdBy", "in", userAndFollowing)
       );
       try {
         const querySnapShot = await getDocs(q);
