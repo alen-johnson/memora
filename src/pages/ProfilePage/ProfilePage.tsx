@@ -1,6 +1,6 @@
 import "./ProfilePage.css";
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, FloatButton, Modal, Skeleton } from "antd";
+import { Button, FloatButton, Modal, Result, Skeleton } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import useLogout from "../../hooks/useLogout";
 import { useState } from "react";
@@ -29,13 +29,11 @@ function ProfilePage() {
   const isOwnProfile = authUser?.username === username;
 
   const handleLogoutAndNavigate = async () => {
-
     setWelcomeShown(false);
     localStorage.setItem("isWelcomeShown", "false");
     await handleLogout();
     navigate("/auth");
   };
-  
 
   const arrowClick = () => {
     navigate("/");
@@ -48,13 +46,13 @@ function ProfilePage() {
   if (isloading) {
     return (
       <div className="loading">
-        <Skeleton.Image active style={{ width: 200, height: 200 }} />
+        <Skeleton.Image active style={{ width: "100%", height: 200 }} />
         <Skeleton.Avatar
           active
           size={"large"}
-          style={{ width: 200, height: 200 }}
+          style={{ width: 150, height: 150 }}
         />
-        <Skeleton paragraph={{ rows: 4 }} active />
+        <Skeleton paragraph={{ rows: 2 }} active />
       </div>
     );
   }
@@ -62,8 +60,16 @@ function ProfilePage() {
   if (!userProfile) {
     return (
       <div className="not-found">
-        <h1>404</h1>
-        <p>Profile not found!</p>
+        <Result
+          status="404"
+          title="404"
+          subTitle="Sorry, the page you visited does not exist."
+          extra={
+            <Button type="primary" onClick={arrowClick}>
+              Back Home
+            </Button>
+          }
+        />
       </div>
     );
   }
@@ -97,7 +103,6 @@ function ProfilePage() {
             className="profile__head-edtbtn"
             loading={isUpdating}
           >
-            {/* need some fix here*/}
             {!isFollowing ? "Follow" : "Unfollow"}
           </Button>
         )}
@@ -113,11 +118,17 @@ function ProfilePage() {
         <p>{userProfile.bio}</p>
       </div>
       <div className="profile__post">
-      <h4>Posts</h4>
-        
-        <ProfilePost/>
+        <h4>Posts</h4>
+
+        <ProfilePost />
       </div>
-      {isOwnProfile && <FloatButton icon={<PlusOutlined />} type="primary" onClick={() =>navigate('/post')} />}
+      {isOwnProfile && (
+        <FloatButton
+          icon={<PlusOutlined />}
+          type="primary"
+          onClick={() => navigate("/post")}
+        />
+      )}
     </div>
   );
 }

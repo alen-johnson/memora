@@ -26,23 +26,23 @@ const useAuthStore = create<AuthState>((set) => ({
   user: localStorage.getItem("user-info")
     ? JSON.parse(localStorage.getItem("user-info") as string)
     : null,
-  isWelcomeShown: localStorage.getItem("isWelcomeShown") === "true", // Read the value from localStorage
+  isWelcomeShown: localStorage.getItem("isWelcomeShown") === "true",
   login: (user) => {
     set({ user });
-    localStorage.setItem("user-info", JSON.stringify(user)); // Save user info in localStorage
+    localStorage.setItem("user-info", JSON.stringify(user)); 
   },
   logout: () => {
     set({ user: null, isWelcomeShown: false });
-    localStorage.removeItem("user-info"); // Remove user info from localStorage
-    localStorage.setItem("isWelcomeShown", "false"); // Reset isWelcomeShown on logout
+    localStorage.removeItem("user-info"); 
+    localStorage.setItem("isWelcomeShown", "false"); 
   },
   setUser: (user) => {
     set({ user });
-    localStorage.setItem("user-info", JSON.stringify(user)); // Update user info in localStorage
+    localStorage.setItem("user-info", JSON.stringify(user)); 
   },
   setWelcomeShown: (status) => {
     set({ isWelcomeShown: status });
-    localStorage.setItem("isWelcomeShown", status ? "true" : "false"); // Save the status in localStorage
+    localStorage.setItem("isWelcomeShown", status ? "true" : "false"); 
   }
 }));
 

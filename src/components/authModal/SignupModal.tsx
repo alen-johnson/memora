@@ -22,11 +22,6 @@ function SignupModal() {
     e.preventDefault();
   };
 
-  // useEffect(() => {
-  //   if (error) {
-  //     showError(error.message || "An unexpected error occurred");
-  //   }
-  // }, [error]);
   return (
     <div className="login">
       <div className="login__card">

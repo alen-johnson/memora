@@ -7,7 +7,7 @@ import useUserProfileStore from "../../store/userProfileStore";
 function ProfilePost() {
   const { isLoading, posts } = useGetUserPosts();
   const [userPosts, setUserPosts] = useState<
-    { id: string; imgUrl?: string; caption: string }[]
+    { id: string; imgUrl?: string; caption: string ; likes:string[] }[]
   >([]);
 
   const userProfile = useUserProfileStore((state) => state.userProfile);
@@ -30,9 +30,9 @@ function ProfilePost() {
     <div className="profile__posts">
       {isLoading ? (
         <>
-          <Skeleton.Image />
-          <Skeleton.Image />
-          <Skeleton.Image />
+          <Skeleton.Image active style={{width: 200, height: 300}} />
+          <Skeleton.Image active style={{width: 200, height: 300}} />
+          <Skeleton.Image active style={{width: 200, height: 300}} />
         </>
       ) : (
         userPosts.map((post) => (
