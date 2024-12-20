@@ -68,7 +68,7 @@ function FeedPost({ post, index, lightColors }: FeedPostProps) {
       </div>
 
       <div className="feed__footer">
-        <LikeButton likes={post.likes ? post.likes.length : 0} />
+        <LikeButton post={post} />
         <Button onClick={setModal} icon={<ShareAltOutlined />}>
           Share
         </Button>

@@ -20,39 +20,37 @@ const useCreatePost = () => {
 
   const handleCreatePost = async (selectedFile: any, caption: string) => {
     if (!selectedFile || !authUser) return showError("Please select an Image");
-
     setIsLoading(true);
-
-    const newPost: Post = {
-      id: "",
+  
+    const newPost: Omit<Post,'id'> = {
       caption: caption,
       likes: [],
       createdAt: Date.now(),
       createdBy: authUser?.uid,
       imgUrl: "",
     };
-
+  
     try {
       const postDocRef = await addDoc(collection(db, "posts"), newPost);
+      const postWithId = { ...newPost, id: postDocRef.id };
+  
       const userDocRef = doc(db, "users", authUser.uid);
       const imgRef = ref(storage, `posts/${postDocRef.id}`);
-
+  
       await updateDoc(userDocRef, { posts: arrayUnion(postDocRef.id) });
+  
       await uploadString(imgRef, selectedFile, "data_url");
-
       const downloadURL = await getDownloadURL(imgRef);
       await updateDoc(postDocRef, { imgUrl: downloadURL });
-
-      newPost.imgUrl = downloadURL;
-
-      createPost({ ...newPost, id: postDocRef.id });
+      postWithId.imgUrl = downloadURL;
+      createPost(postWithId);
 
       showSuccess("Posted");
     } catch (error) {
       if (error instanceof Error) {
-        showError("Error" + error.message);
+        showError("Error: " + error.message);
       } else {
-        showError("Error" + "An unknown error occurred");
+        showError("An unknown error occurred");
       }
     } finally {
       setIsLoading(false);
