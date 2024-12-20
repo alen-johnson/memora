@@ -10,58 +10,98 @@ import {
   whatsapp,
 } from "../../assets/imageIndex";
 import "./ShareModal.css";
-
-function ShareModal() {
+import { Post } from "../../store/postStore";
+interface PostProps {
+  post: Post;
+}
+//@ts-ignore
+function ShareModal({ post }: PostProps) {
   const [copied, setCopied] = useState(false);
-
   const handleCopyClick = () => {
     navigator.clipboard.writeText("https://dummy-url").then(() => {
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000); // Reset the copied state after 2 seconds
+      setTimeout(() => setCopied(false), 2000);
     });
-
   };
   return (
     <div className="share">
       <div className="share__row1">
         <div className="share__row-item">
-          <img src={twitter} alt="twitter" />
+          <img
+            src={twitter}
+            alt="twitter"
+            onClick={() => window.open("https://twitter.com", "_blank")}
+            style={{ cursor: "pointer" }}
+          />
           <span className="hover-text">Twitter</span>
         </div>
         <div className="share__row-item">
-          <img src={facebook} alt="facebook" />
+          <img
+            src={facebook}
+            alt="facebook"
+            onClick={() => window.open("https://facebook.com", "_blank")}
+            style={{ cursor: "pointer" }}
+          />
           <span className="hover-text">Facebook</span>
         </div>
         <div className="share__row-item">
-          <img src={reddit} alt="reddit" />
+          <img
+            src={reddit}
+            alt="reddit"
+            onClick={() => window.open("https://reddit.com", "_blank")}
+            style={{ cursor: "pointer" }}
+          />
           <span className="hover-text">Reddit</span>
         </div>
         <div className="share__row-item">
-          <img src={discord} alt="discord" />
+          <img
+            src={discord}
+            alt="discord"
+            onClick={() => window.open("https://discord.com", "_blank")}
+            style={{ cursor: "pointer" }}
+          />
           <span className="hover-text">Discord</span>
         </div>
       </div>
       <div className="share__row2">
         <div className="share__row-item">
-          <img src={whatsapp} alt="whatsapp" />
+          <img
+            src={whatsapp}
+            alt="whatsapp"
+            onClick={() => window.open("https://whatsapp.com", "_blank")}
+            style={{ cursor: "pointer" }}
+          />
           <span className="hover-text">WhatsApp</span>
         </div>
-
         <div className="share__row-item">
-          <img src={messenger} alt="messenger" />
+          <img
+            src={messenger}
+            alt="messenger"
+            onClick={() => window.open("https://messenger.com", "_blank")}
+            style={{ cursor: "pointer" }}
+          />
           <span className="hover-text">Messenger</span>
         </div>
-
         <div className="share__row-item">
-          <img src={telegram} alt="telegram" />
+          <img
+            src={telegram}
+            alt="telegram"
+            onClick={() => window.open("https://telegram.org", "_blank")}
+            style={{ cursor: "pointer" }}
+          />
           <span className="hover-text">Telegram</span>
         </div>
-
         <div className="share__row-item">
-          <img src={instagram} alt="instagram" />
+          <img
+            src={instagram}
+            alt="instagram"
+            onClick={() => window.open("https://instagram.com", "_blank")}
+            style={{ cursor: "pointer" }}
+          />
           <span className="hover-text">Instagram</span>
         </div>
       </div>
+
       <div className="share__row3">
         <h4>Page Link</h4>
         <div className="share__row3-url">
@@ -71,7 +111,6 @@ function ShareModal() {
               className="cp-tooltip"
               data-text-initial="Copy to clipboard"
               data-text-end="Copied!"
-
             ></span>
             <span>
               <svg

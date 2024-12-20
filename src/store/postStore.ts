@@ -4,6 +4,7 @@ export interface  Post {
   id: string;
   caption: string;
   imgUrl: string;
+  likes: string[];
   createdAt: number;
   createdBy: string;
 }

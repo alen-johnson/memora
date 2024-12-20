@@ -115,6 +115,7 @@
     cursor: pointer;
     position: relative;
     outline: none;
+    margin: 5px;
   }
   
   .btn-copy > .cp-tooltip {

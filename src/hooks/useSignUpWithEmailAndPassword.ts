@@ -57,11 +57,11 @@ const useSignUpWithEmailAndPassword = () => {
         const userDoc = {
           uid: newUser.user.uid,
           email: inputs.email,
-          username: inputs.username,
+          username: inputs.username.toLowerCase(),
           fullname: inputs.fullname,
           bio: "",
           profilePicURL: "",
-          coverPicUrl: "",
+          coverPicURL: "",
           followers: [],
           following: [],
           createdAt: Date.now(),
