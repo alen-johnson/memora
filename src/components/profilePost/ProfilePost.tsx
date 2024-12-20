@@ -30,9 +30,9 @@ function ProfilePost() {
     <div className="profile__posts">
       {isLoading ? (
         <>
-          <Skeleton.Image />
-          <Skeleton.Image />
-          <Skeleton.Image />
+          <Skeleton.Image active style={{width: 200, height: 300}} />
+          <Skeleton.Image active style={{width: 200, height: 300}} />
+          <Skeleton.Image active style={{width: 200, height: 300}} />
         </>
       ) : (
         userPosts.map((post) => (

@@ -1,4 +1,4 @@
-import {Skeleton } from "antd";
+import { Skeleton } from "antd";
 import { FeedPost, RadioNav } from "../componetIndex";
 import "./Feed.css";
 import getFeedPosts from "../../hooks/useGetFeed";
@@ -10,9 +10,16 @@ function Feed() {
 
   if (isLoading) {
     return (
-      <>
-        <Skeleton />
-      </>
+      <div className="loading"> 
+        <Skeleton.Button active style={{width:100, height: 50}}/>
+        <Skeleton.Avatar active style={{}}/>
+        <Skeleton.Button active style={{width:200, height: 30}}/>
+        <Skeleton.Image active style={{width:300, height: 400}}/>
+        <Skeleton.Avatar active style={{}}/>
+        <Skeleton.Button active style={{width:200, height: 30}}/>
+        <Skeleton.Image active style={{width:300, height: 400}}/>
+
+      </div>
     );
   }
 
@@ -25,7 +32,12 @@ function Feed() {
 
       {!isLoading && posts.length > 0 ? (
         posts.map((post: Post, index: number) => (
-          <FeedPost key={post.id} post={post} index={index} lightColors={lightColors} />
+          <FeedPost
+            key={post.id}
+            post={post}
+            index={index}
+            lightColors={lightColors}
+          />
         ))
       ) : (
         <div>Follow users to see posts</div>
