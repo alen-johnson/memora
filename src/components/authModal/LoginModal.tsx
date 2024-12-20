@@ -26,12 +26,6 @@ function LoginModal() {
     login({ email, password });
   };
 
-  // useEffect(() => {
-  //     if (error) {
-  //       showError( "An unexpected error occurred");
-  //     }
-  //   }, [error]);
-
   return (
     <div className="login">
       <div className="login__card">

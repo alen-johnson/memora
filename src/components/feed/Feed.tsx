@@ -7,7 +7,6 @@ import { Post } from "../../store/postStore";
 
 function Feed() {
   const { isLoading, posts } = getFeedPosts();
-  console.log("=======>", posts[0]?.caption);
 
   if (isLoading) {
     return (

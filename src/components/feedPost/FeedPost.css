@@ -1,79 +1,81 @@
 .feed {
-    display: flex;
-    flex-direction: column;
-    max-width: 460px;
-    border-radius: 40px;
-    margin: 20px;
-  }
-  
-  .feed__header {
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem 0 0 1rem;
-  }
-  
-  .feed__header-profile {
-    display: flex;
-    height: 60px;
-    padding: 0 0 0 20px;
-  }
-  
-  .feed__header-profile img {
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
+  display: flex;
+  flex-direction: column;
+  max-width: 470px;
+  border-radius: 40px;
+  margin: 20px;
+}
 
-  }
-  
-  .feed__header-profile_det {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      margin:5px 15px; 
-  }
-    
-    .feed__header-profile_det h4{
-      margin: 0; 
-      line-height: 1.5; 
-      font-family: var(--font-secondary);
-    }
-    .feed__header-profile_det p {
-        margin: 0;
-        line-height: 1.5;
-        font-size: 14px;
-        opacity: .4;
-        font-family: var(--font-primary);
-    }
-  
-  .feed__header-content {
-    padding: 0 0 0 20px;
-  }
-  .feed__header-content p{
-      line-height: 1;
-  }
-  
-  .feed__content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 460px;
-  }
-  
-  .feed__content img {
-    max-width: 400px;
-    max-height: 440px;
-    border-radius: 15px;
-    object-fit: cover;
-    width: auto;
-    height: auto;
-  }
-  
-  
-  
-  .feed__footer{
-      padding: 10px 1rem 0 1rem;
-      display: flex;
-      width: 88%;
-      justify-content: space-between;
-      align-items: center;
-  }
+.feed__header {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0 0 10px;
+}
+
+.feed__header-profile {
+  display: flex;
+  height: 60px;
+  padding: 0 0 0 20px;
+}
+
+.feed__header-profile img {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+
+.feed__header-profile_det {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 5px 15px;
+}
+
+.feed__header-profile_det h4 {
+  margin: 0;
+  line-height: 1.5;
+  font-family: var(--font-secondary);
+}
+.feed__header-profile_det p {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 14px;
+  opacity: 0.4;
+  font-family: var(--font-primary);
+}
+.feed__header-profile_det h4:hover,.feed__header-profile img:hover{
+    cursor: pointer;
+}
+
+
+.feed__header-content {
+  padding: 0 20px;
+}
+.feed__header-content p {
+  line-height: 1;
+  font-family: var(--font-primary);
+}
+
+.feed__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 460px;
+}
+
+.feed__content img {
+  max-width: 400px;
+  max-height: 440px;
+  border-radius: 15px;
+  object-fit: cover;
+  width: auto;
+  height: auto;
+}
+
+.feed__footer {
+  padding: 10px 1rem 0 1rem;
+  display: flex;
+  width: 88%;
+  justify-content: space-between;
+  align-items: center;
+}

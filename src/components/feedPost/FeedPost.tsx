@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ShareAltOutlined } from "@ant-design/icons";
 import { Post } from "../../store/postStore";
 import useGetProfileById from "../../hooks/useGetProfileById";
+import { useNavigate } from "react-router-dom";
 
 interface FeedPostProps {
   post: Post;
@@ -15,6 +16,7 @@ interface FeedPostProps {
 function FeedPost({ post, index, lightColors }: FeedPostProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { userProfile } = useGetProfileById(post.createdBy);
+  const navigate = useNavigate()
 
   const formatTime = (timetamp: number) => {
     const now = Date.now();
@@ -39,6 +41,10 @@ function FeedPost({ post, index, lightColors }: FeedPostProps) {
     setIsOpen(!isOpen);
   };
 
+  const handleProfileClick = (user:string | undefined) => {
+    navigate(`/${user}`)
+  }
+
   return (
     <div
       className="feed"
@@ -46,9 +52,9 @@ function FeedPost({ post, index, lightColors }: FeedPostProps) {
     >
       <div className="feed__header">
         <div className="feed__header-profile">
-          <img src={userProfile?.profilePicURL || ""} alt="user" />
+          <img src={userProfile?.profilePicURL || ""} alt="user"  onClick={() => handleProfileClick(userProfile?.username)}/>
           <div className="feed__header-profile_det">
-            <h4>{userProfile?.username || "Unknown User"}</h4>
+            <h4 onClick={() => handleProfileClick(userProfile?.username)}>{userProfile?.username || "Unknown User"}</h4>
             <p>{formatTime(post.createdAt)}</p>
           </div>
         </div>
