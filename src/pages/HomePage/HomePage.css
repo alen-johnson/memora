@@ -54,16 +54,17 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .home__body-nav {
   display: flex;
-  margin: 3rem 0 0 0;
+margin: 12rem 0 0;
 }
 
 .home__body-side {
-  margin-top: 5rem;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 3.5rem;
 }
 
 .navbar-menu {
@@ -96,14 +97,17 @@
   font-size: 1rem;
 }
 
-@media screen and (min-width: 780px) {
+@media screen and (min-width: 800px) {
   .navbar-menu {
     display: none;
   }
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 800px) {
   .home__body-side {
+    display: none;
+  }
+  .home__body-nav{
     display: none;
   }
 }

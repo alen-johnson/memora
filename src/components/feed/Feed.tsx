@@ -4,21 +4,32 @@ import "./Feed.css";
 import getFeedPosts from "../../hooks/useGetFeed";
 
 import { Post } from "../../store/postStore";
+import { useEffect, useState } from "react";
 
 function Feed() {
   const { isLoading, posts } = getFeedPosts();
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
-  if (isLoading) {
+
+  useEffect(() => {
+    if (!isLoading) {
+      const timer = setTimeout(() => {
+        setShowSkeleton(false);
+      }, 1000); 
+      return () => clearTimeout(timer); 
+    }
+  }, [isLoading]);
+
+  if (showSkeleton) {
     return (
-      <div className="loading"> 
-        <Skeleton.Button active style={{width:100, height: 50}}/>
-        <Skeleton.Avatar active style={{}}/>
-        <Skeleton.Button active style={{width:200, height: 30}}/>
-        <Skeleton.Image active style={{width:300, height: 400}}/>
-        <Skeleton.Avatar active style={{}}/>
-        <Skeleton.Button active style={{width:200, height: 30}}/>
-        <Skeleton.Image active style={{width:300, height: 400}}/>
-
+      <div className="loading">
+        <Skeleton.Button active style={{ width: 100, height: 50 }} />
+        <Skeleton.Avatar active />
+        <Skeleton.Button active style={{ width: 200, height: 30 }} />
+        <Skeleton.Image active style={{ width: 400, height: 500, margin:10  }} />
+        <Skeleton.Avatar active />
+        <Skeleton.Button active style={{ width: 200, height: 30 }} />
+        <Skeleton.Image active style={{ width: 400, height: 500, margin:10  }} />
       </div>
     );
   }
@@ -40,7 +51,7 @@ function Feed() {
           />
         ))
       ) : (
-        <div>Follow users to see posts</div>
+        <p className="feed__p">Follow users to see posts</p>
       )}
     </div>
   );

@@ -33,8 +33,10 @@ const useSignUpWithEmailAndPassword = () => {
       showError("Please fill in all fields!");
       return;
     }
+
+    const uname = formatName(inputs.username)
     const usersRef = collection(db, "users");
-    const q = query(usersRef, where("username", "==", inputs.username));
+    const q = query(usersRef, where("username", "==", uname));
     const profSnap = await getDocs(q);
 
     if (!profSnap.empty) {
@@ -53,11 +55,12 @@ const useSignUpWithEmailAndPassword = () => {
         return;
       }
 
+
       if (newUser) {
         const userDoc = {
           uid: newUser.user.uid,
           email: inputs.email,
-          username: inputs.username.toLowerCase(),
+          username: uname,
           fullname: inputs.fullname,
           bio: "",
           profilePicURL: "",
@@ -85,3 +88,7 @@ const useSignUpWithEmailAndPassword = () => {
 };
 
 export default useSignUpWithEmailAndPassword;
+
+const formatName = (name:string) => {
+
+  return name.split(" ").join("").toLowerCase();}

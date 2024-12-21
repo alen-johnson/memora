@@ -22,8 +22,9 @@ function EditPage() {
   const [profileImg, setProfileImg] = useState(
     authUser?.profilePicURL || profile
   );
+  const [loading, setLoading] = useState(false);
   const [coverImg, setCoverImg] = useState(authUser?.coverPicURL || cover);
-  const { isUpdating, editProfile } = useEditProfile();
+  const { editProfile, checkUsernameAvailability } = useEditProfile();
   const navigate = useNavigate();
   const { showError } = useShowMessage();
   const fileRefProfile = useRef<HTMLInputElement | null>(null);
@@ -41,22 +42,42 @@ function EditPage() {
     }
   }, [coverFile]);
 
-  const arrowClick = () => {
-    navigate(`/${authUser?.username}`);
+  const resetForm = () => {
+    setInputs({
+      fullname: authUser?.fullname || "",
+      username: authUser?.username || "",
+      bio: authUser?.bio || "",
+    });
+    setProfileImg(authUser?.profilePicURL || profile);
+    setCoverImg(authUser?.coverPicURL || cover);
   };
 
   const handleSave = async () => {
     try {
-      await editProfile(inputs, profileFile, coverFile);
+      setLoading(true);
+      if (inputs.username && inputs.username !== authUser?.username) {
+        const isUsernameAvailable = await checkUsernameAvailability(
+          inputs.username
+        );
+        if (!isUsernameAvailable) {
+          showError("Username is already taken. Please choose another.");
+          setLoading(false);
+          resetForm();
 
+          return;
+        }
+      }
+
+      await editProfile(inputs, profileFile, coverFile);
       setTimeout(() => {
-        navigate(`/${authUser?.username}`);
+        setLoading(false);
+        navigate(`/${inputs.username}`); 
       }, 2000);
     } catch (error) {
       if (error instanceof Error) {
-        showError("Error" + error.message);
+        showError("Error: " + error.message);
       } else {
-        showError("Error" + "An unknown error occurred");
+        showError("Error: An unknown error occurred.");
       }
     }
   };
@@ -67,7 +88,7 @@ function EditPage() {
         <ProfileHeader
           text="Go Back"
           showButtons={false}
-          onArrowClick={arrowClick}
+          onArrowClick={() => navigate(`/${authUser?.username}`)}
           onLogoutClick={() => {}}
           isLoggingOut={false}
           profileImage={profileImg}
@@ -76,11 +97,7 @@ function EditPage() {
 
         <EditFilled
           className="edit__header-btn1"
-          onClick={() => {
-            if (fileRefProfile.current) {
-              fileRefProfile.current.click();
-            }
-          }}
+          onClick={() => fileRefProfile.current?.click()}
         />
         <input
           type="file"
@@ -90,11 +107,7 @@ function EditPage() {
         />
         <EditFilled
           className="edit__header-btn2"
-          onClick={() => {
-            if (fileRefCover.current) {
-              fileRefCover.current.click();
-            }
-          }}
+          onClick={() => fileRefCover.current?.click()}
         />
         <input
           type="file"
@@ -110,7 +123,6 @@ function EditPage() {
           <Input
             value={inputs.fullname}
             onChange={(e) => setInputs({ ...inputs, fullname: e.target.value })}
-            variant="borderless"
           />
           <div className="edit__bio-underline" />
         </div>
@@ -120,7 +132,6 @@ function EditPage() {
           <Input
             value={inputs.username}
             onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
-            variant="borderless"
           />
           <div className="edit__bio-underline" />
         </div>
@@ -130,7 +141,6 @@ function EditPage() {
           <Input.TextArea
             value={inputs.bio}
             onChange={(e) => setInputs({ ...inputs, bio: e.target.value })}
-            variant="borderless"
             autoSize={{ minRows: 3, maxRows: 6 }}
           />
           <div className="edit__bio-underline" />
@@ -146,7 +156,7 @@ function EditPage() {
             width: "98%",
           }}
           onClick={handleSave}
-          loading={isUpdating}
+          loading={loading}
         >
           Save
         </Button>
