@@ -8,10 +8,11 @@
     background-color: #EEE;
     box-sizing: border-box;
     box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
-    padding: 0.25rem;
-    width: 200px;
+    padding: 0.1rem;
+    width: 220px;
     font-size: 10px;
-    height: 35px;
+    height: 30px;
+    margin: 0 10px;
   }
   
   .radio-inputs .radio {

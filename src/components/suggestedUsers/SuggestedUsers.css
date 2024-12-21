@@ -56,3 +56,8 @@
 .suggestedusers__content-follow:hover {
   color: #0056b3;
 }
+
+.loading-sug{
+  padding-top: 5rem;
+  min-width: 15vw;
+}

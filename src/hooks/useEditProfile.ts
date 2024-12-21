@@ -5,6 +5,7 @@ import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../services/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import useUserProfileStore from "../store/userProfileStore";
+import { query, collection, where, getDocs } from "firebase/firestore";
 
 interface Inputs {
   fullname?: string;
@@ -18,6 +19,20 @@ const useEditProfile = () => {
   const setAuthUser = useAuthStore((state) => state.setUser);
   const setUserProfile = useUserProfileStore((state) => state.setUserProfile);
   const { showError, showSuccess } = useShowMessage();
+
+  const checkUsernameAvailability = async (username: string): Promise<boolean> => {
+    try {
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("username", "==", username));
+      const querySnapshot = await getDocs(q);
+  
+      return querySnapshot.empty;
+    } catch (error) {
+      console.error("Error checking username availability:", error);
+      return false; 
+    }
+  };
+  
 
   const editProfile = async (
     inputs: Inputs,
@@ -74,7 +89,7 @@ const useEditProfile = () => {
     }
   };
   
-  return { editProfile, isUpdating };
+  return { editProfile, isUpdating, checkUsernameAvailability };
 };
 
 export default useEditProfile;
