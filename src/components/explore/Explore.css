@@ -1,7 +1,17 @@
+.explore{
+    display: flex;
+    flex-direction: column;
+}
+
 .explore h2{
     padding:  0 1rem 0 2rem;
     font-family: var(--font-primary);
     font-size: 26px;
   
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+.explore p{
+    margin: 2rem 6rem;
+    font-family: var(--font-primary);
 }

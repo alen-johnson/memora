@@ -6,30 +6,45 @@ import { useEffect, useState } from "react";
 import { Skeleton } from "antd";
 
 function Explore() {
-
   const [showSkeleton, setShowSkeleton] = useState(true);
-  //@ts-ignore
-  const { isLoading, posts } = getExplorePosts();
+  const { isLoading, posts, isFetchingMore, fetchMore, hasMore } = getExplorePosts();
 
   useEffect(() => {
     if (!isLoading) {
       const timer = setTimeout(() => {
         setShowSkeleton(false);
       }, 1000); 
-      return () => clearTimeout(timer); 
+      return () => clearTimeout(timer);
     }
   }, [isLoading]);
 
-  if (showSkeleton) {
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+          document.documentElement.offsetHeight - 100 &&
+        hasMore && 
+        !isFetchingMore
+      ) {
+        fetchMore();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [fetchMore, hasMore, isFetchingMore]);
+
+  // Skeleton loading placeholder
+  if (showSkeleton || isLoading) {
     return (
       <div className="loading">
         <Skeleton.Button active style={{ width: 100, height: 50 }} />
         <Skeleton.Avatar active />
         <Skeleton.Button active style={{ width: 200, height: 30 }} />
-        <Skeleton.Image active style={{ width: 400, height: 500, margin:10  }} />
+        <Skeleton.Image active style={{ width: 400, height: 500, margin: 10 }} />
         <Skeleton.Avatar active />
         <Skeleton.Button active style={{ width: 200, height: 30 }} />
-        <Skeleton.Image active style={{ width: 400, height: 500, margin:10  }} />
+        <Skeleton.Image active style={{ width: 400, height: 500, margin: 10 }} />
       </div>
     );
   }
@@ -47,7 +62,6 @@ function Explore() {
     "#FFF3E3",
   ];
 
-
   return (
     <div className="explore">
       <h2>Explore</h2>
@@ -61,6 +75,9 @@ function Explore() {
           />
         ))}
       </div>
+
+      {isFetchingMore && <p>Loading more posts...</p>}
+      {!hasMore && <p>No more posts to load</p>}
     </div>
   );
 }

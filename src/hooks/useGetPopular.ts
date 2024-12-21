@@ -19,11 +19,10 @@ const useGetPopular = () => {
           return {
             id: doc.id,
             ...data,
-            likes: Array.isArray(data.likes) ? data.likes : [], // Ensure `likes` is an array
+            likes: Array.isArray(data.likes) ? data.likes : [], 
           } as Post;
         });
 
-        // Sort posts by likes (highest to lowest)
         const sortedPosts = popularPosts.sort(
           (a, b) => (b.likes?.length || 0) - (a.likes?.length || 0)
         );
@@ -42,7 +41,7 @@ const useGetPopular = () => {
     };
 
     getPopularPosts();
-  }, [showError, setPosts]); // Removed unnecessary `authUser` dependency
+  }, [showError, setPosts]); 
 
   return { isLoading, posts };
 };
