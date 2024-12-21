@@ -1,15 +1,16 @@
-import "./Explore.css";
-import getExplorePosts from "../../hooks/useGetExplore";
-import { Posts } from "../componetIndex";
-import { Post } from "../../store/postStore";
-import { useEffect, useState } from "react";
-import { Skeleton } from "antd";
+import { useEffect, useState } from 'react';
+import './Popular.css'
+import { Skeleton } from 'antd';
+import { Post } from '../../store/postStore';
+import { Posts } from '../componetIndex';
+import getPopularPosts from "../../hooks/useGetPopular";
 
-function Explore() {
+function Popular() {
+
 
   const [showSkeleton, setShowSkeleton] = useState(true);
-  //@ts-ignore
-  const { isLoading, posts } = getExplorePosts();
+
+  const { isLoading, posts } = getPopularPosts();
 
   useEffect(() => {
     if (!isLoading) {
@@ -46,11 +47,9 @@ function Explore() {
     "#E6FFEB",
     "#FFF3E3",
   ];
-
-
   return (
-    <div className="explore">
-      <h2>Explore</h2>
+    <div className='popular'>
+      <h2>Popular</h2>
       <div>
         {posts.map((post: Post, index: number) => (
           <Posts
@@ -62,7 +61,7 @@ function Explore() {
         ))}
       </div>
     </div>
-  );
+  )
 }
 
-export default Explore;
+export default Popular

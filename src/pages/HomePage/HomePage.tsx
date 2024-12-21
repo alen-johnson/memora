@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 import {
   Explore,
   Feed,
-  Friends,
   Navbar,
   Notifications,
+  Popular,
   SuggestedUsers,
 } from "../../components/componetIndex";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ import useAuthStore from "../../store/authStore";
 function HomePage() {
   const [tab, setTab] = useState("Feed");
   const [toggleMenu, setToggleMenu] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 770);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
   const navigate = useNavigate();
 
   const authUser = useAuthStore((state) => state.user);
@@ -27,7 +27,7 @@ function HomePage() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 780);
+      setIsMobile(window.innerWidth <= 800);
     };
     window.addEventListener("resize", handleResize);
 
@@ -96,7 +96,7 @@ function HomePage() {
         <div className="home__body-content">
           {tab === "Feed" && <Feed />}
           {tab === "Explore" && <Explore />}
-          {tab === "Friends" && <Friends />}
+          {tab === "Popular" && <Popular />}
           {tab === "Notifications" && <Notifications />}
         </div>
 

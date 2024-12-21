@@ -46,7 +46,7 @@ function ProfilePage() {
   if (isloading) {
     return (
       <div className="loading">
-        <Skeleton.Image active style={{ width: "100%", height: 200 }} />
+        <Skeleton.Image active style={{ width: "100%", height: 220 }} />
         <Skeleton.Avatar
           active
           size={"large"}
@@ -111,6 +111,7 @@ function ProfilePage() {
         open={isOpen}
         onOk={handleLogoutAndNavigate}
         onCancel={() => setIsOpen(!isOpen)}
+        width={400}
         title="Are you sure you want to log out?"
       />
       <div className="profile__bio">

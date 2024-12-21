@@ -1,6 +1,11 @@
 
+.feed-wrapper{
+  min-width: 50%;
+  width: 460px;
+
+}
 .feed-wrapper h2 {
-  padding: 3rem 0 0 3rem;
+  padding: 1rem 1rem 1rem 3rem;
   font-family: var(--font-primary);
   font-size: 26px;
 
@@ -19,4 +24,15 @@
   display: flex;
   flex-direction: column;
   gap: 10px
+}
+
+.feed__p{
+  font-family: var(--font-secondary);
+  padding: 8rem;
+}
+
+@media screen and (max-width: 320px) {
+  .feed__radionav{
+    display: none;
+  }
 }

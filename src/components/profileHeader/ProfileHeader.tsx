@@ -26,7 +26,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
 
   return (
     <div className="profile__header">
-      <ArrowLeftOutlined className="rofile__header-arrow" onClick={onArrowClick} color="black" />
+      <ArrowLeftOutlined className="profile__header-arrow" onClick={onArrowClick} color="black" />
       {text && <span className="profile__header-text">{text}</span>}
       
 
