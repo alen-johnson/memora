@@ -1,19 +1,19 @@
 import { Button, Modal } from "antd";
 import { LikeButton, ShareModal } from "../componetIndex";
-import "./FeedPost.css";
+import "./Posts.css";
 import { useState } from "react";
 import { ShareAltOutlined } from "@ant-design/icons";
 import { Post } from "../../store/postStore";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import { useNavigate } from "react-router-dom";
 
-interface FeedPostProps {
+interface PostProps {
   post: Post;
   index: number;
   lightColors: string[];
 }
 
-function FeedPost({ post, index, lightColors }: FeedPostProps) {
+function Posts({ post, index, lightColors }: PostProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { userProfile } = useGetProfileById(post.createdBy);
   const navigate = useNavigate();
@@ -107,4 +107,4 @@ function FeedPost({ post, index, lightColors }: FeedPostProps) {
   );
 }
 
-export default FeedPost;
+export default Posts;

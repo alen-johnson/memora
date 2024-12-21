@@ -1,15 +1,18 @@
+import React, { useEffect, useState } from "react";
 import { Skeleton } from "antd";
-import { FeedPost, RadioNav } from "../componetIndex";
+import { Posts, RadioNav } from "../componetIndex";
 import "./Feed.css";
 import getFeedPosts from "../../hooks/useGetFeed";
-
 import { Post } from "../../store/postStore";
-import { useEffect, useState } from "react";
 
 function Feed() {
   const { isLoading, posts } = getFeedPosts();
   const [showSkeleton, setShowSkeleton] = useState(true);
+  const [filter, setFilter] = useState<string>("Friends"); 
 
+  const handleFilterChange = (selected: string) => {
+    setFilter(selected); 
+  };
 
   useEffect(() => {
     if (!isLoading) {
@@ -20,16 +23,23 @@ function Feed() {
     }
   }, [isLoading]);
 
+  const filteredPosts = React.useMemo(() => {
+    if (filter === "Popular") {
+      return [...posts].sort((a, b) => (b.likes?.length || 0) - (a.likes?.length || 0));
+    }
+    return posts; 
+  }, [filter, posts]);
+
   if (showSkeleton) {
     return (
       <div className="loading">
         <Skeleton.Button active style={{ width: 100, height: 50 }} />
         <Skeleton.Avatar active />
         <Skeleton.Button active style={{ width: 200, height: 30 }} />
-        <Skeleton.Image active style={{ width: 400, height: 500, margin:10  }} />
+        <Skeleton.Image active style={{ width: 400, height: 500, margin: 10 }} />
         <Skeleton.Avatar active />
         <Skeleton.Button active style={{ width: 200, height: 30 }} />
-        <Skeleton.Image active style={{ width: 400, height: 500, margin:10  }} />
+        <Skeleton.Image active style={{ width: 400, height: 500, margin: 10 }} />
       </div>
     );
   }
@@ -38,12 +48,12 @@ function Feed() {
     <div className="feed-wrapper">
       <div className="feed__radionav">
         <h2>Feeds</h2>
-        <RadioNav />
+        <RadioNav onSelect={handleFilterChange} /> {/* Pass the filter handler */}
       </div>
 
-      {!isLoading && posts.length > 0 ? (
-        posts.map((post: Post, index: number) => (
-          <FeedPost
+      {!isLoading && filteredPosts.length > 0 ? (
+        filteredPosts.map((post: Post, index: number) => (
+          <Posts
             key={post.id}
             post={post}
             index={index}
