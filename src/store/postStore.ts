@@ -3,7 +3,7 @@ import { create } from "zustand";
 export interface  Post {
   id: string;
   caption: string;
-  imgUrl: string;
+  imgUrls: string[];
   likes: string[];
   createdAt: number;
   createdBy: string;

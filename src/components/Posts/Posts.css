@@ -51,6 +51,7 @@
 .feed__header-content {
   padding: 0 20px;
 }
+
 .feed__header-content p {
   line-height: 1;
   font-family: var(--font-primary);
@@ -68,11 +69,14 @@
   max-width: 85%;
   max-height: 80%;
   border-radius: 15px;
+  margin: 10px;
   object-fit: cover;
   width: auto;
   height: auto;
 }
-
+.feed__content-img.multi-image {
+  max-width: 45%;
+}
 .feed__footer {
   padding: 10px 1rem 0 1rem;
   display: flex;

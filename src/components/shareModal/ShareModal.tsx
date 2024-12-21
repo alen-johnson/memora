@@ -11,14 +11,17 @@ import {
 } from "../../assets/imageIndex";
 import "./ShareModal.css";
 import { Post } from "../../store/postStore";
+import useGetProfileById from "../../hooks/useGetProfileById";
 interface PostProps {
   post: Post;
 }
 //@ts-ignore
 function ShareModal({ post }: PostProps) {
   const [copied, setCopied] = useState(false);
+  const { userProfile } = useGetProfileById(post.createdBy);
+
   const handleCopyClick = () => {
-    navigator.clipboard.writeText("https://dummy-url").then(() => {
+    navigator.clipboard.writeText(`/${userProfile?.username}`).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
@@ -105,7 +108,7 @@ function ShareModal({ post }: PostProps) {
       <div className="share__row3">
         <h4>Page Link</h4>
         <div className="share__row3-url">
-          <p>https://dummy-url</p>
+          <p>{`/${userProfile?.username}`}</p>
           <button className="btn-copy" onClick={handleCopyClick}>
             <span
               className="cp-tooltip"

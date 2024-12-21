@@ -10,7 +10,7 @@ import {
   updateDoc,
   arrayUnion,
 } from "firebase/firestore";
-import { ref, uploadString, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const useCreatePost = () => {
   const { showError, showSuccess } = useShowMessage();
@@ -18,16 +18,18 @@ const useCreatePost = () => {
   const authUser = useAuthStore((state) => state.user);
   const createPost = usePostStore((state) => state.createPost);
 
-  const handleCreatePost = async (selectedFile: any, caption: string) => {
-    if (!selectedFile || !authUser) return showError("Please select an Image");
+  const handleCreatePost = async (selectedFiles: any[], caption: string) => {
+    if (!selectedFiles || selectedFiles.length === 0 || !authUser) {
+      return showError("Please select at least one image or video");
+    }
     setIsLoading(true);
   
-    const newPost: Omit<Post,'id'> = {
+    const newPost: Omit<Post, "id"> = {
       caption: caption,
       likes: [],
       createdAt: Date.now(),
       createdBy: authUser?.uid,
-      imgUrl: "",
+      imgUrls: [], 
     };
   
     try {
@@ -35,20 +37,26 @@ const useCreatePost = () => {
       const postWithId = { ...newPost, id: postDocRef.id };
   
       const userDocRef = doc(db, "users", authUser.uid);
-      const imgRef = ref(storage, `posts/${postDocRef.id}`);
   
       await updateDoc(userDocRef, { posts: arrayUnion(postDocRef.id) });
   
-      await uploadString(imgRef, selectedFile, "data_url");
-      const downloadURL = await getDownloadURL(imgRef);
-      await updateDoc(postDocRef, { imgUrl: downloadURL });
-      postWithId.imgUrl = downloadURL;
+      for (const selectedFile of selectedFiles) {
+        const imgRef = ref(storage, `posts/${postDocRef.id}/${selectedFile.name}`);
+  
+        await uploadBytes(imgRef, selectedFile);
+        const downloadURL = await getDownloadURL(imgRef);
+        newPost.imgUrls.push(downloadURL);  
+      }
+  
+      await updateDoc(postDocRef, { imgUrls: newPost.imgUrls });
+      postWithId.imgUrls = newPost.imgUrls;
       createPost(postWithId);
-
-      showSuccess("Posted");
+  
+      showSuccess("Posted successfully");
     } catch (error) {
       if (error instanceof Error) {
         showError("Error: " + error.message);
+        console.log(error.message)
       } else {
         showError("An unknown error occurred");
       }

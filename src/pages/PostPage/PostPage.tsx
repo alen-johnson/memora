@@ -8,6 +8,7 @@ import useCreatePost from "../../hooks/useCreatePost";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useCameraCapture } from "../../hooks/useCamerCapture";
+import { dataURLtoBlob } from "../../helpers/dataURLtoBlob";
 
 function PostPage() {
   const [fileUrls, setFileUrls] = useState<string[]>([]);
@@ -25,16 +26,6 @@ function PostPage() {
     (acceptedFiles: FileWithPath[]) => {
       if (fileUrls.length >= 4) return;
 
-      const isVideo = acceptedFiles.some((file) =>
-        file.type.startsWith("video")
-      );
-      const hasImage = files.some((file) => file.type.startsWith("image"));
-
-      if (isVideo && hasImage) {
-        showError("You cannot upload a video with an image.");
-        return;
-      }
-
       const newFiles = acceptedFiles.slice(0, 4 - fileUrls.length);
 
       setFiles((prevFiles) => [...prevFiles, ...newFiles]);
@@ -43,7 +34,7 @@ function PostPage() {
         ...newFiles.map((file) => URL.createObjectURL(file)),
       ]);
     },
-    [fileUrls, files]
+    [fileUrls]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -70,45 +61,30 @@ function PostPage() {
   };
 
   const handlePost = async () => {
-    if (files.length === 0 && !capturedImage) {
-      showError("Please select an image to upload.");
+    if ((files.length === 0 && !capturedImage) ) {
+      showError("Please select an image ");
       return;
     }
 
-    const selectedFile = files.length > 0 ? files[0] : capturedImage; 
-    const reader = new FileReader();
-
-    reader.onload = async () => {
-      if (reader.result) {
-        await handleCreatePost(reader.result, caption);
-        navigate("/");
-      }
-    };
-
-    reader.onerror = () => {
-      showError("Failed to read the selected file.");
-    };
-
-    if (typeof selectedFile === "string") {
-      await handleCreatePost(selectedFile, caption);
-      navigate("/");  
-    } 
-    else if (selectedFile instanceof Blob) {
-      reader.readAsDataURL(selectedFile); 
-    } else {
-      showError("Invalid file type.");
+    const selectedFiles = [...files];
+    if (capturedImage) {
+      const capturedBlob = dataURLtoBlob(capturedImage); 
+      const capturedFile = new File([capturedBlob], "captured_image.jpg", { type: "image/jpeg" });
+      selectedFiles.push(capturedFile);
     }
-  
+    
+    await handleCreatePost(selectedFiles, caption); 
+    navigate("/");  
   };
 
   const handleCameraClick = async () => {
     await startCamera(); 
     setIsCameraActive(true);
-  
+
     if (capturedImage) {
       const imgContainer = document.querySelector(".post__img-container");
       const previewContainer = document.querySelector(".post__preview-container");
-  
+
       if (imgContainer && previewContainer) {
         imgContainer.classList.add("hidden");
         previewContainer.classList.remove("hidden"); 
@@ -202,7 +178,7 @@ function PostPage() {
         )}
       </div>
 
-      {fileUrls.length > 0 && fileUrls.length < 4 && (
+      {fileUrls.length > 0 && fileUrls.length < 2 && (
         <Button
           className="add-more-btn"
           icon={<span className="anticon">+</span>}
@@ -211,16 +187,17 @@ function PostPage() {
           Select More
         </Button>
       )}
-{fileUrls.length < 1 &&(
-      <Button
-        onClick={handleCameraClick}
-        className="post-btn"
-        style={{ width: 200 }}
-      >
-        Capture
-      </Button>
-)
-}
+
+      {fileUrls.length < 1 && (
+        <Button
+          onClick={handleCameraClick}
+          className="post-btn"
+          style={{ width: 200 }}
+        >
+          Capture
+        </Button>
+      )}
+
       <div className="post__caption-container">
         <p className="post-caption">Caption</p>
         <Input.TextArea
