@@ -16,7 +16,7 @@ interface FeedPostProps {
 function FeedPost({ post, index, lightColors }: FeedPostProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { userProfile } = useGetProfileById(post.createdBy);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const formatTime = (timetamp: number) => {
     const now = Date.now();
@@ -41,9 +41,9 @@ function FeedPost({ post, index, lightColors }: FeedPostProps) {
     setIsOpen(!isOpen);
   };
 
-  const handleProfileClick = (user:string | undefined) => {
-    navigate(`/${user}`)
-  }
+  const handleProfileClick = (user: string | undefined) => {
+    navigate(`/${user}`);
+  };
 
   return (
     <div
@@ -52,9 +52,15 @@ function FeedPost({ post, index, lightColors }: FeedPostProps) {
     >
       <div className="feed__header">
         <div className="feed__header-profile">
-          <img src={userProfile?.profilePicURL || ""} alt="user"  onClick={() => handleProfileClick(userProfile?.username)}/>
+          <img
+            src={userProfile?.profilePicURL || ""}
+            alt="user"
+            onClick={() => handleProfileClick(userProfile?.username)}
+          />
           <div className="feed__header-profile_det">
-            <h4 onClick={() => handleProfileClick(userProfile?.username)}>{userProfile?.username || "Unknown User"}</h4>
+            <h4 onClick={() => handleProfileClick(userProfile?.username)}>
+              {userProfile?.username || "Unknown User"}
+            </h4>
             <p>{formatTime(post.createdAt)}</p>
           </div>
         </div>
@@ -69,12 +75,22 @@ function FeedPost({ post, index, lightColors }: FeedPostProps) {
 
       <div className="feed__footer">
         <LikeButton post={post} />
-        <Button onClick={setModal} icon={<ShareAltOutlined />}>
+        <Button
+          className="feed__footer-sharebtn"
+          onClick={setModal}
+          icon={<ShareAltOutlined />}
+        >
           Share
         </Button>
         <Modal
           title={
-            <span style={{ fontSize: "24px", fontWeight: "bold" }}>
+            <span
+              style={{
+                fontSize: "26px",
+                fontWeight: "bold",
+                fontFamily: "var(--font-primary)",
+              }}
+            >
               Share Post
             </span>
           }
@@ -84,7 +100,7 @@ function FeedPost({ post, index, lightColors }: FeedPostProps) {
           footer={null}
           width={400}
         >
-          <ShareModal />
+          <ShareModal post={post} />
         </Modal>
       </div>
     </div>

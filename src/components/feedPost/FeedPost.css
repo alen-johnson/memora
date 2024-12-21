@@ -1,9 +1,9 @@
 .feed {
   display: flex;
   flex-direction: column;
-  max-width: 470px;
+  max-width: 460px;
   border-radius: 40px;
-  margin: 20px;
+  margin: 10px 0;
 }
 
 .feed__header {
@@ -60,12 +60,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 460px;
+  width: 100%;
+  overflow: hidden;
 }
 
 .feed__content img {
-  max-width: 400px;
-  max-height: 440px;
+  max-width: 85%;
+  max-height: 80%;
   border-radius: 15px;
   object-fit: cover;
   width: auto;
@@ -78,4 +79,11 @@
   width: 88%;
   justify-content: space-between;
   align-items: center;
+}
+
+.feed__footer-sharebtn{
+  border-radius: 20px;
+  font-size: large;
+  font-weight: bold;
+  font-family: var(--font-primary);
 }

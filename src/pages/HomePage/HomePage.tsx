@@ -18,7 +18,7 @@ import useAuthStore from "../../store/authStore";
 function HomePage() {
   const [tab, setTab] = useState("Feed");
   const [toggleMenu, setToggleMenu] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 770);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
   const navigate = useNavigate();
 
   const authUser = useAuthStore((state) => state.user);
@@ -27,7 +27,7 @@ function HomePage() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 780);
+      setIsMobile(window.innerWidth <= 800);
     };
     window.addEventListener("resize", handleResize);
 
