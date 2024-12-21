@@ -17,10 +17,10 @@ function Navbar(props: { onTabChange: (tab: string) => void }) {
           Explore
         </button>
         <button
-          onClick={() => props.onTabChange("Friends")}
+          onClick={() => props.onTabChange("Popular")}
           className="navbar__button"
         >
-          Friends
+          Popular
         </button>
         <button
           onClick={() => props.onTabChange("Notifications")}

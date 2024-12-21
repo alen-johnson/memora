@@ -19,3 +19,4 @@ export { default as twitter } from "./tweet.png";
 export { default as whatsapp } from "./whatsapp.png";
 export {default as cover} from "./cover.jpg"
 export {default as post} from "./post.png"
+export {default as group} from "./Group.png"

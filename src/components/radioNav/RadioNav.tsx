@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import "./RadioNav.css";
 
-const RadioNav: React.FC = () => {
+interface RadioNavProps {
+  onSelect: (selected: string) => void; 
+}
+
+const RadioNav: React.FC<RadioNavProps> = ({ onSelect }) => {
   const [selected, setSelected] = useState<string>("Friends");
+
+  const handleSelection = (value: string) => {
+    setSelected(value);
+    onSelect(value); 
+  };
 
   return (
     <div className="radio-inputs">
@@ -12,7 +21,7 @@ const RadioNav: React.FC = () => {
           name="radio"
           value="Recents"
           checked={selected === "Recents"}
-          onChange={() => setSelected("Recents")}
+          onChange={() => handleSelection("Recents")}
         />
         <span className="name">Recents</span>
       </label>
@@ -23,7 +32,7 @@ const RadioNav: React.FC = () => {
           name="radio"
           value="Friends"
           checked={selected === "Friends"}
-          onChange={() => setSelected("Friends")}
+          onChange={() => handleSelection("Friends")}
         />
         <span className="name">Friends</span>
       </label>
@@ -34,7 +43,7 @@ const RadioNav: React.FC = () => {
           name="radio"
           value="Popular"
           checked={selected === "Popular"}
-          onChange={() => setSelected("Popular")}
+          onChange={() => handleSelection("Popular")}
         />
         <span className="name">Popular</span>
       </label>

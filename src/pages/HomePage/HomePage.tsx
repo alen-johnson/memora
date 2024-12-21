@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 import {
   Explore,
   Feed,
-  Friends,
   Navbar,
   Notifications,
+  Popular,
   SuggestedUsers,
 } from "../../components/componetIndex";
 import { useNavigate } from "react-router-dom";
@@ -96,7 +96,7 @@ function HomePage() {
         <div className="home__body-content">
           {tab === "Feed" && <Feed />}
           {tab === "Explore" && <Explore />}
-          {tab === "Friends" && <Friends />}
+          {tab === "Friends" && <Popular />}
           {tab === "Notifications" && <Notifications />}
         </div>
 
