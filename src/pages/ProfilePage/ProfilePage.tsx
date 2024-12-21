@@ -111,6 +111,7 @@ function ProfilePage() {
         open={isOpen}
         onOk={handleLogoutAndNavigate}
         onCancel={() => setIsOpen(!isOpen)}
+        width={400}
         title="Are you sure you want to log out?"
       />
       <div className="profile__bio">

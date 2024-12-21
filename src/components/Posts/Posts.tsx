@@ -6,6 +6,7 @@ import { ShareAltOutlined } from "@ant-design/icons";
 import { Post } from "../../store/postStore";
 import useGetProfileById from "../../hooks/useGetProfileById";
 import { useNavigate } from "react-router-dom";
+import { formatTime } from "../../helpers/formatTime";
 
 interface PostProps {
   post: Post;
@@ -18,24 +19,7 @@ function Posts({ post, index, lightColors }: PostProps) {
   const { userProfile } = useGetProfileById(post.createdBy);
   const navigate = useNavigate();
 
-  const formatTime = (timetamp: number) => {
-    const now = Date.now();
-    const diffInSec = Math.floor((now - timetamp) / 1000);
-    const diffInMin = Math.floor(diffInSec / 60);
-    const diffInHour = Math.floor(diffInMin / 60);
-    const diffInDay = Math.floor(diffInHour / 24);
-
-    if (diffInSec < 60) {
-      return `${diffInSec} seconds ago`;
-    } else if (diffInMin < 60) {
-      return `${diffInMin} minutes ago`;
-    } else if (diffInHour < 24) {
-      return `${diffInHour} hours ago`;
-    } else {
-      if (diffInDay === 1) return `${diffInDay} day ago`;
-      else return `${diffInDay} days ago`;
-    }
-  };
+  
 
   const setModal = () => {
     setIsOpen(!isOpen);
@@ -70,7 +54,16 @@ function Posts({ post, index, lightColors }: PostProps) {
       </div>
 
       <div className="feed__content">
-        <img src={post.imgUrl} alt="post" />
+        {post.imgUrls?.map((imgUrl, index) => (
+          <img
+            key={index}
+            src={imgUrl}
+            alt={`post-image-${index}`}
+            className={`feed__content-img ${
+              post.imgUrls.length > 1 ? "multi-image" : ""
+            }`}
+          />
+        ))}
       </div>
 
       <div className="feed__footer">

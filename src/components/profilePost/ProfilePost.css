@@ -1,57 +1,85 @@
-
 .profile__posts {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-    gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
 
-    width: 90vw;
-    box-sizing: border-box; 
-  }
-  
+  width: 90vw;
+  box-sizing: border-box;
+}
 
-  .profile__posts-item {
-    background-color: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.profile__posts-item {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-  }
-  
+.profile__posts-media-container {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
 
-  .profile__posts-media {
-    max-width: 100%; 
-    max-height: 300px; 
-    border-radius: 8px;
-    object-fit: cover; 
+.profile__posts-media {
+  width: 90%;
+  height: 90%;
+  object-fit: contain; 
+  display: block;
+}
 
-  }
-  
+.profile__posts-imgnum {
+  position: absolute;
+  top: 15px;
+  right: 30px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.profile__posts-likes {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  display: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  display: none;
+}
 
-  .profile__posts-item .ant-skeleton-image {
-    height: 200px; 
-    border-radius: 10px;
-    margin-bottom: 10px;
-  }
-  
+.profile__posts-likes .heart-icon {
+  margin-right: 5px;
+}
 
-  @media (max-width: 600px) {
-    .profile__posts {
-      grid-template-columns: repeat(2, 1fr);
-    }
+.profile__posts-media-container:hover .profile__posts-likes {
+  display: flex;
+}
+
+
+@media (max-width: 600px) {
+  .profile__posts {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  @media (min-width: 601px) and (max-width: 1024px) {
-    .profile__posts {
-      grid-template-columns: repeat(3, 1fr); 
-    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .profile__posts {
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  @media (min-width: 1025px) {
-    .profile__posts {
-      grid-template-columns: repeat(4, 1fr); 
-    }
+}
+
+@media (min-width: 1025px) {
+  .profile__posts {
+    grid-template-columns: repeat(4, 1fr);
   }
-  
+}
