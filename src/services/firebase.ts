@@ -5,15 +5,14 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 
-console.log(process.env.REACT_APP_FIREBASE_API_KEY);
 
-const API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
-const AUTH_DOMAIN = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
-const PROJECT_ID = process.env.REACT_APP_FIREBASE_PROJECT_ID;
-const STORAGE_BUCKET = process.env.REACT_APP_FIREBASE_STORAGE_BUCKET;
-const MESSAGING_SENDER_ID = process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID;
-const APP_ID = process.env.REACT_APP_FIREBASE_APP_ID;
-const MEASUREMENT_ID = process.env.REACT_APP_FIREBASE_MEASUREMENT_ID;
+const API_KEY = import.meta.env.VITE_FIREBASE_API_KEY
+const AUTH_DOMAIN =import.meta.env.VITE_FIREBASE_AUTH_DOMAIN;
+const PROJECT_ID = import.meta.env.VITE_FIREBASE_PROJECT_ID;
+const STORAGE_BUCKET = import.meta.env.VITE_FIREBASE_STOARGE_BUCKET;
+const MESSAGING_SENDER_ID = import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID;
+const APP_ID = import.meta.env.VITE_FIREBASE_APP_ID;
+const MEASUREMENT_ID =import.meta.env.VITE_FIREBASE_MEASUREMENT_ID;
 
 const firebaseConfig = {
   apiKey: API_KEY,
