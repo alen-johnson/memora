@@ -14,11 +14,13 @@
     max-width: 480px;
     gap: 10px;
     z-index: 1;
+
 }
 
 .auth__images img{
     width: 150px;
-    height: 200px
+    height: 200px;
+    margin: 0 0 5px
 }
 
 .auth__login{

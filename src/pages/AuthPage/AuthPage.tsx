@@ -47,7 +47,9 @@ function AuthPage() {
           const userDoc: User = {
             uid: newUser.user.uid,
             email: newUser.user.email ?? "",
-            username: newUser.user.email ? newUser.user.email.split("@")[0] : "",
+            username: newUser.user.email
+              ? newUser.user.email.split("@")[0]
+              : "",
             fullname: newUser.user.displayName ?? "",
             bio: "",
             profilePicURL: newUser.user.photoURL ?? "",
@@ -77,15 +79,22 @@ function AuthPage() {
   return (
     <div className="auth">
       <div className="auth__images">
-        <img src={img1} alt="img1" />
-        <img src={img8} alt="img" />
-        <img src={img3} alt="img" />
-        <img src={img4} alt="img" />
-        <img src={img2} alt="img" />
-        <img src={img5} alt="img" />
-        <img src={img6} alt="img" />
-        <img src={img7} alt="img" />
-        <img src={img9} alt="img" />
+        <div className="auth__images-col1">
+          <img src={img1} alt="img1" />
+          <img src={img7} alt="img" />
+          <img src={img9} alt="img" />
+        </div>
+        <div className="auth__images-col2">
+          <img src={img4} alt="img" />
+          <img src={img2} alt="img" />
+          <img src={img5} alt="img" />
+        </div>
+        <div className="auth__images-col3">
+          <img src={img3} alt="img" />
+          <img src={img6} alt="img" />
+          <img src={img8} alt="img" />
+        </div>
+
       </div>
       <div className="auth__login">
         <div className="auth__login-header">
