@@ -75,7 +75,7 @@ function PostPage() {
       return;
     }
 
-    const selectedFile = files[0] || capturedImage;
+    const selectedFile = files.length > 0 ? files[0] : capturedImage; 
     const reader = new FileReader();
 
     reader.onload = async () => {
@@ -89,7 +89,16 @@ function PostPage() {
       showError("Failed to read the selected file.");
     };
 
-    reader.readAsDataURL(selectedFile);
+    if (typeof selectedFile === "string") {
+      await handleCreatePost(selectedFile, caption);
+      navigate("/");  
+    } 
+    else if (selectedFile instanceof Blob) {
+      reader.readAsDataURL(selectedFile); 
+    } else {
+      showError("Invalid file type.");
+    }
+  
   };
 
   const handleCameraClick = async () => {
