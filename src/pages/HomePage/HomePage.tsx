@@ -96,7 +96,7 @@ function HomePage() {
         <div className="home__body-content">
           {tab === "Feed" && <Feed />}
           {tab === "Explore" && <Explore />}
-          {tab === "Friends" && <Popular />}
+          {tab === "Popular" && <Popular />}
           {tab === "Notifications" && <Notifications />}
         </div>
 
