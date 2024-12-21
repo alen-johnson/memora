@@ -4,6 +4,7 @@ import { Posts, RadioNav } from "../componetIndex";
 import "./Feed.css";
 import useGetFeed from "../../hooks/useGetFeed";
 import { Post } from "../../store/postStore";
+import { lightColors } from "../../helpers/lightColours";
 
 function Feed() {
   const { isLoading, posts, fetchMorePosts, isEndOfFeed } = useGetFeed();
@@ -94,18 +95,5 @@ function Feed() {
     </div>
   );
 }
-
-const lightColors = [
-  "#F7EBFF",
-  "#FFFAEE",
-  "#E6F7FF",
-  "#D5F5E3",
-  "#FFF1C1",
-  "#FFEDDA",
-  "#F2F3F4",
-  "#F9E5D5",
-  "#E6FFEB",
-  "#FFF3E3",
-];
 
 export default Feed;
