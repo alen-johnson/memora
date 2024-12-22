@@ -30,6 +30,10 @@
   font-family: var(--font-secondary);
   padding: 8rem;
 }
+.feed__end-message{
+  margin: 2rem 6rem;
+  font-family: var(--font-primary);
+}
 
 @media screen and (max-width: 320px) {
   .feed__radionav{
