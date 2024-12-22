@@ -1,106 +1,87 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import usePostStore, { Post } from "../store/postStore";
 import useAuthStore from "../store/authStore";
 import useShowMessage from "./useShowMessage";
-import {
-  collection,
-  query,
-  getDocs,
-  orderBy,
-  startAfter,
-  limit,
-  QueryDocumentSnapshot,
-} from "firebase/firestore";
 import { db } from "../services/firebase";
+import { query, collection, where, orderBy, limit, startAfter, getDocs, QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
 
 const POSTS_PER_PAGE = 10;
 
 const useGetExplore = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isFetchingMore, setIsFetchingMore] = useState(false); 
-  const [lastVisible, setLastVisible] = useState<QueryDocumentSnapshot | null>(null); 
-  const [hasMore, setHasMore] = useState(true); 
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
+  const [lastVisible, setLastVisible] = useState<QueryDocumentSnapshot<DocumentData> | null>(null);
+  const [hasMore, setHasMore] = useState(true);
   const { posts, setPosts } = usePostStore();
   const authUser = useAuthStore((state) => state.user);
   const { showError } = useShowMessage();
 
-  const getExplorePosts = async (isInitialLoad: boolean = true) => {
-    if (isLoading || isFetchingMore || !hasMore) return; 
+  const getExplorePosts = async (isInitialLoad = true) => {
+    if (isLoading || isFetchingMore || !hasMore) return;
 
-    if (isInitialLoad) {
-      setIsLoading(true);
-    } else {
-      setIsFetchingMore(true);
-    }
+    if (isInitialLoad) setIsLoading(true);
+    else setIsFetchingMore(true);
 
     try {
-      const postsQuery = lastVisible
-        ? query(
-            collection(db, "posts"),
-            orderBy("createdAt", "desc"),
-            startAfter(lastVisible),
-            limit(POSTS_PER_PAGE)
-          )
-        : query(
-            collection(db, "posts"),
-            orderBy("createdAt", "desc"),
-            limit(POSTS_PER_PAGE)
-          );
+      const userAndFollowing = [authUser?.uid, ...(authUser?.following ?? [])];
 
-      const querySnapShot = await getDocs(postsQuery);
+      const baseQuery = query(
+        collection(db, "posts"),
+        where("createdBy", "not-in", userAndFollowing),
+        orderBy("createdAt", "desc"),
+        limit(POSTS_PER_PAGE)
+      );
+
+      const paginatedQuery = lastVisible
+        ? query(baseQuery, startAfter(lastVisible))
+        : baseQuery;
+
+      const querySnapShot = await getDocs(paginatedQuery);
 
       if (querySnapShot.empty) {
-        setHasMore(false);
+        setHasMore(false); 
         return;
       }
 
-      const explorePosts: Post[] = [];
-      querySnapShot.forEach((doc) => {
-        explorePosts.push({ id: doc.id, ...doc.data() } as Post);
-      });
+      const explorePosts: Post[] = querySnapShot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      } as Post));
 
-      const filteredPosts = explorePosts.filter(
-        (post) =>
-          post.createdBy !== authUser?.uid &&
-          !authUser?.following.includes(post.createdBy)
-      );
+      if (querySnapShot.docs.length > 0) {
+        setLastVisible(querySnapShot.docs[querySnapShot.docs.length - 1]);
+      }
 
-      const lastVisibleDoc = querySnapShot.docs[querySnapShot.docs.length - 1];
-      setLastVisible(lastVisibleDoc);
-
-      const updatedPosts = isInitialLoad
-        ? filteredPosts
-        : [...posts, ...filteredPosts];
+      const updatedPosts = isInitialLoad ? explorePosts : [...posts, ...explorePosts];
       setPosts(updatedPosts);
 
-      if (filteredPosts.length < POSTS_PER_PAGE) {
-        setHasMore(false);
+      if (querySnapShot.docs.length < POSTS_PER_PAGE) {
+        setHasMore(false); 
       }
     } catch (error) {
       if (error instanceof Error) {
         showError("Error: " + error.message);
+        console.log(error.message)
       } else {
-        showError("Some unknown error occurred");
+        showError("An unknown error occurred.");
       }
-      console.error("Error fetching explore posts:", error);
     } finally {
-      if (isInitialLoad) {
-        setIsLoading(false);
-      } else {
-        setIsFetchingMore(false);
-      }
+      if (isInitialLoad) setIsLoading(false);
+      else setIsFetchingMore(false);
     }
   };
 
   useEffect(() => {
-    getExplorePosts(true);
+    if (authUser) {
+      getExplorePosts(true); // Fetch initial explore posts
+    }
   }, [authUser]);
 
   return {
     isLoading,
     isFetchingMore,
     posts,
-    fetchMore: () => getExplorePosts(false),
+    fetchMore: () => getExplorePosts(false), // Fetch more posts on demand
     hasMore,
   };
 };

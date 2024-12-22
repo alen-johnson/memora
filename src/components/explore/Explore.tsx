@@ -14,7 +14,7 @@ function Explore() {
     if (!isLoading) {
       const timer = setTimeout(() => {
         setShowSkeleton(false);
-      }, 1000); 
+      },1000); 
       return () => clearTimeout(timer);
     }
   }, [isLoading]);
@@ -35,17 +35,16 @@ function Explore() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [fetchMore, hasMore, isFetchingMore]);
 
-  // Skeleton loading placeholder
   if (showSkeleton || isLoading) {
     return (
       <div className="loading">
         <Skeleton.Button active style={{ width: 100, height: 50 }} />
         <Skeleton.Avatar active />
         <Skeleton.Button active style={{ width: 200, height: 30 }} />
-        <Skeleton.Image active style={{ width: 400, height: 500, margin: 10 }} />
+        <Skeleton.Image active style={{ width: 460, height: 500, margin: 10 }} />
         <Skeleton.Avatar active />
         <Skeleton.Button active style={{ width: 200, height: 30 }} />
-        <Skeleton.Image active style={{ width: 400, height: 500, margin: 10 }} />
+        <Skeleton.Image active style={{ width: 460, height: 500, margin: 10 }} />
       </div>
     );
   }
