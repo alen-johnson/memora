@@ -30,6 +30,7 @@ function Posts({ post, index, lightColors }: PostProps) {
   };
 
   return (
+
     <div
       className="feed"
       style={{ backgroundColor: lightColors[index % lightColors.length] }}
@@ -97,6 +98,7 @@ function Posts({ post, index, lightColors }: PostProps) {
         </Modal>
       </div>
     </div>
+
   );
 }
 

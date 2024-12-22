@@ -1,11 +1,7 @@
 
-.feed-wrapper{
-  min-width: 50%;
-  width: 460px;
 
-}
-.feed-wrapper h2 {
-  padding: 1rem 1rem 1rem 3rem;
+.feed h2 {
+  padding: 1rem 4rem 2rem 3rem;
   font-family: var(--font-primary);
   font-size: 26px;
 
@@ -17,7 +13,7 @@
   width:90%;
   height: 50px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .loading{
@@ -35,8 +31,8 @@
   font-family: var(--font-primary);
 }
 
-@media screen and (max-width: 320px) {
-  .feed__radionav{
+@media screen and (max-width: 370px) {
+  .feed__radionav > :not(h2){
     display: none;
   }
 }
