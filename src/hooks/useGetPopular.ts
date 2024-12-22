@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import usePostStore, { Post } from "../store/postStore";
 import useShowMessage from "./useShowMessage";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, query, getDocs, limit, orderBy } from "firebase/firestore";
 import { db } from "../services/firebase";
+
+const POSTS_PER_PAGE = 10;
 
 const useGetPopular = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,17 +15,22 @@ const useGetPopular = () => {
     const getPopularPosts = async () => {
       setIsLoading(true);
       try {
-        const querySnapShot = await getDocs(collection(db, "posts"));
+
+        const q = query(
+          collection(db, "posts"),
+          orderBy("createdAt", "desc"),  
+          limit(POSTS_PER_PAGE)
+        );
+        const querySnapShot = await getDocs(q);
         const popularPosts: Post[] = querySnapShot.docs.map((doc) => {
           const data = doc.data();
           return {
             id: doc.id,
             ...data,
-            likes: Array.isArray(data.likes) ? data.likes : [], // Ensure `likes` is an array
+            likes: Array.isArray(data.likes) ? data.likes : [], 
           } as Post;
         });
 
-        // Sort posts by likes (highest to lowest)
         const sortedPosts = popularPosts.sort(
           (a, b) => (b.likes?.length || 0) - (a.likes?.length || 0)
         );
@@ -42,7 +49,7 @@ const useGetPopular = () => {
     };
 
     getPopularPosts();
-  }, [showError, setPosts]); // Removed unnecessary `authUser` dependency
+  }, [showError, setPosts]); 
 
   return { isLoading, posts };
 };

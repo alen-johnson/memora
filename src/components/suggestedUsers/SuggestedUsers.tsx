@@ -4,7 +4,6 @@ import "./SuggestedUsers.css";
 import useAuthStore, { User } from "../../store/authStore";
 import { useNavigate } from "react-router-dom";
 import useFollowUser from "../../hooks/useFollowUser";
-import { Skeleton } from "antd";
 
 
 function SuggestedUsers() {
@@ -16,8 +15,7 @@ function SuggestedUsers() {
   if (isLoading) {
     return (
       <div className="loading-sug">
-        <Skeleton.Avatar/>
-        <Skeleton.Input/>
+
       </div>
     )
   }
