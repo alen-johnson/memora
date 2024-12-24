@@ -1,5 +1,4 @@
 import { FloatButton } from "antd";
-import { profile } from "../../assets/imageIndex";
 import "./HomePage.css";
 import { PlusOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
@@ -14,6 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import useAuthStore from "../../store/authStore";
+import { setProfileImg } from "../../helpers/setProfileImg";
 
 function HomePage() {
   const [tab, setTab] = useState("Feed");
@@ -51,10 +51,6 @@ function HomePage() {
     }
   };
 
-  const profileimg = authUser?.profilePicURL && authUser.profilePicURL !== "" 
-    ? authUser.profilePicURL 
-    : profile;
-
   return (
     <div className="home">
       <div className="home__header">
@@ -75,7 +71,7 @@ function HomePage() {
             </div>
           )}
           <img
-            src={profileimg}
+            src={setProfileImg(authUser?.profilePicURL)}
             alt="profile"
             className="home__header-profile"
             onClick={handleProfileClick}

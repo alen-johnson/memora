@@ -8,9 +8,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../services/firebase";
 import useAuthStore from "../../store/authStore";
 import { ProfileHeader, ProfilePost } from "../../components/componetIndex";
-import { cover, profile } from "../../assets/imageIndex";
 import useGetProfileByUsername from "../../hooks/useGetProfileByUsername";
 import useFollowUser from "../../hooks/useFollowUser";
+import { setCoverImg, setProfileImg } from "../../helpers/setProfileImg";
 
 function ProfilePage() {
   const { username } = useParams<{ username: string }>();
@@ -74,11 +74,6 @@ function ProfilePage() {
     );
   }
 
-  const coverimg = userProfile.coverPicURL ? userProfile.coverPicURL : cover;
-  const profileimg = userProfile.profilePicURL
-    ? userProfile.profilePicURL
-    : profile;
-
   return (
     <div className="profile">
       <ProfileHeader
@@ -87,8 +82,8 @@ function ProfilePage() {
         onArrowClick={arrowClick}
         onLogoutClick={() => setIsOpen(!isOpen)}
         isLoggingOut={isLoggingOut}
-        coverImage={coverimg}
-        profileImage={profileimg}
+        coverImage={setCoverImg(userProfile.coverPicURL)}
+        profileImage={setProfileImg(userProfile.profilePicURL)}
       />
       <div className="profile__head">
         {isOwnProfile && (
