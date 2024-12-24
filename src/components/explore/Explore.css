@@ -15,6 +15,13 @@
   font-family: var(--font-primary);
 }
 
+.explore__end{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 @media screen and (max-width: 460px) {
   .explore {
     min-width: 100%;

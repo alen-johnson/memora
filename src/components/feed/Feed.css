@@ -28,8 +28,15 @@
   font-family: var(--font-secondary);
   padding: 8rem;
 }
+
+.feed__end{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .feed__end-message{
-  margin: 2rem 6rem;
+  margin: 2rem 5rem;
   font-family: var(--font-primary);
 }
 

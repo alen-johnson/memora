@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Skeleton } from "antd";
-import { Posts, RadioNav } from "../componetIndex";
+import { Posts, RadioNav, ToTopButton } from "../componetIndex";
 import "./Feed.css";
 import useGetFeed from "../../hooks/useGetFeed";
 import { Post } from "../../store/postStore";
@@ -90,7 +90,10 @@ function Feed() {
       )}
 
       {isEndOfFeed && (
+        <div className="feed__end">
         <p className="feed__end-message">You've reached the end of the feed</p>
+        <ToTopButton/>
+        </div>
       )}
     </div>
   );
