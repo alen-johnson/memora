@@ -55,10 +55,10 @@ function Feed() {
         <Skeleton.Button active style={{ width: 100, height: 50 }} />
         <Skeleton.Avatar active />
         <Skeleton.Button active style={{ width: 200, height: 30 }} />
-        <Skeleton.Image active style={{ width: 460, height: 500, margin: 10 }} />
+        <Skeleton.Image active style={{ width: 400, height: 500, margin:10  }} />
         <Skeleton.Avatar active />
         <Skeleton.Button active style={{ width: 200, height: 30 }} />
-        <Skeleton.Image active style={{ width: 460, height: 500, margin: 10 }} />
+        <Skeleton.Image active style={{ width: 400, height: 500, margin:10  }} />
       </div>
     );
   }
