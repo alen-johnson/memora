@@ -4,6 +4,7 @@ import "./SuggestedUsers.css";
 import useAuthStore, { User } from "../../store/authStore";
 import { useNavigate } from "react-router-dom";
 import useFollowUser from "../../hooks/useFollowUser";
+import { setProfileImg } from "../../helpers/setProfileImg";
 
 
 function SuggestedUsers() {
@@ -36,7 +37,7 @@ const handleFollowClick = (userId: string) => {
         {suggestedUsers.map((user: User) => (
           <div key={user.uid} className="suggestedusers__content-item">
             <img
-              src={user.profilePicURL}
+              src={setProfileImg(user.profilePicURL)}
               alt={user.username}
               className="suggestedusers__content-img"
               onClick={() => navigate(`/${user.username}`)} 

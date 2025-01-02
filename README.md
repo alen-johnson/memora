@@ -45,7 +45,7 @@ A scalable social media platform built with React, TypeScript, Firebase, and Zus
 
 ## Existing Issues
 
-->Bug: Sometimes the app fails to load video after succesful upload
+->Bug: Popular page allignment 
 ->Feature: -Notifications for new followers are not implemented yet
            -Mutiple image post is currenlty limited to 2
 ->Improvement: Improve the UI for mobile devices.

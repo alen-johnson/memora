@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Skeleton } from "antd";
-import { Posts, RadioNav } from "../componetIndex";
+import { Posts, RadioNav, ToTopButton } from "../componetIndex";
 import "./Feed.css";
 import useGetFeed from "../../hooks/useGetFeed";
 import { Post } from "../../store/postStore";
@@ -55,10 +55,10 @@ function Feed() {
         <Skeleton.Button active style={{ width: 100, height: 50 }} />
         <Skeleton.Avatar active />
         <Skeleton.Button active style={{ width: 200, height: 30 }} />
-        <Skeleton.Image active style={{ width: 460, height: 500, margin: 10 }} />
+        <Skeleton.Image active style={{ width: 400, height: 500, margin:10  }} />
         <Skeleton.Avatar active />
         <Skeleton.Button active style={{ width: 200, height: 30 }} />
-        <Skeleton.Image active style={{ width: 460, height: 500, margin: 10 }} />
+        <Skeleton.Image active style={{ width: 400, height: 500, margin:10  }} />
       </div>
     );
   }
@@ -90,7 +90,10 @@ function Feed() {
       )}
 
       {isEndOfFeed && (
+        <div className="feed__end">
         <p className="feed__end-message">You've reached the end of the feed</p>
+        <ToTopButton/>
+        </div>
       )}
     </div>
   );
