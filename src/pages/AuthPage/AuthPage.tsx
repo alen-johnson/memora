@@ -99,9 +99,9 @@ function AuthPage() {
       <div className="auth__login">
         <div className="auth__login-header">
           <img src={logo} alt="logo" />
-          <h2>Vibesnap</h2>
+          <h2>Memora</h2>
         </div>
-        <p>Moments That Matter, Shared Forever</p>
+        <p>Share, Like, Relive</p>
         <Button
           onClick={handleGoogleAuth}
           icon={<GoogleOutlined style={{ color: "red" }} />}

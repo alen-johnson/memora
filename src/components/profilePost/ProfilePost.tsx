@@ -3,6 +3,7 @@ import useGetUserPosts from "../../hooks/useGetUserPosts";
 import "./ProfilePost.css";
 import { Skeleton } from "antd";
 import useUserProfileStore from "../../store/userProfileStore";
+import { isVideo } from "../../helpers/isVideo";
 
 function ProfilePost() {
   const { isLoading, posts } = useGetUserPosts();
@@ -20,13 +21,6 @@ function ProfilePost() {
       setUserPosts(filteredPosts);
     }
   }, [posts, userProfile]);
-
-  const isVideo = (url: string | undefined) => {
-    return (
-      url &&
-      (url.includes(".mp4") || url.includes(".webm") || url.includes(".ogg"))
-    );
-  };
 
   return (
     <div className="profile__posts">

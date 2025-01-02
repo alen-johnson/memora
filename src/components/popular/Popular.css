@@ -1,7 +1,15 @@
 .popular h2{
+    justify-self: flex-start;
     padding:  0 1rem 0 2rem;
     font-family: var(--font-primary);
     font-size: 26px;
   
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+.popular__end{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

@@ -18,7 +18,7 @@ const useGetPopular = () => {
 
         const q = query(
           collection(db, "posts"),
-          orderBy("createdAt", "desc"),  
+          orderBy("likes", "desc"),  
           limit(POSTS_PER_PAGE)
         );
         const querySnapShot = await getDocs(q);
