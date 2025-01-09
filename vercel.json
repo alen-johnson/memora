@@ -5,5 +5,8 @@
       "destination": "/index.html"
     }
   ],
-  "cleanUrls": true
+  "cleanUrls": true,
+  "fallbacks": {
+    "index": "/index.html"
+  }
 }
