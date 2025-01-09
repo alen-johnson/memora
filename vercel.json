@@ -1,12 +1,9 @@
 {
   "rewrites": [
     {
-      "source": "/:path*",
-      "destination": "/index.html"
+      "source": "/(.*)",
+      "destination": "/"
     }
   ],
-  "cleanUrls": true,
-  "fallbacks": {
-    "index": "/index.html"
-  }
+  "cleanUrls": true
 }
