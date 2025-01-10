@@ -83,7 +83,6 @@ const useEditProfile = () => {
       } else {
         showError("Error: An unknown error occurred");
       }
-      console.log("Update failed");
     } finally {
       setIsUpdating(false);
     }
