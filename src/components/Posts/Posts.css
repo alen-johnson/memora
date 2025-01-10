@@ -3,7 +3,9 @@
   flex-direction: column;
   max-width: 460px;
   border-radius: 40px;
+  min-height: 400px;
   margin: 10px 20px;
+  justify-content: space-between;
 }
 
 .feed__header {
@@ -55,6 +57,7 @@
 .feed__header-content p {
   line-height: 1;
   font-family: var(--font-primary);
+  margin: 1rem 5px;
 }
 
 .feed__content {
