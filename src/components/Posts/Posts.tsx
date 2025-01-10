@@ -8,6 +8,7 @@ import useGetProfileById from "../../hooks/useGetProfileById";
 import { useNavigate } from "react-router-dom";
 import { formatTime } from "../../helpers/formatTime";
 import { isVideo } from "../../helpers/isVideo";
+import { setProfileImg } from "../../helpers/setProfileImg";
 
 interface PostProps {
   post: Post;
@@ -30,8 +31,10 @@ function Posts({ post, index, lightColors }: PostProps) {
 
   const handleVideoClose = (event: React.SyntheticEvent<HTMLVideoElement>) => {
     const videoElement = event.currentTarget;
-    videoElement.controls = true; // Enable controls for the specific video
+    videoElement.controls = true; 
   };
+
+  const profile = setProfileImg(userProfile?.profilePicURL);
 
   return (
     <div
@@ -41,7 +44,7 @@ function Posts({ post, index, lightColors }: PostProps) {
       <div className="feed__header">
         <div className="feed__header-profile">
           <img
-            src={userProfile?.profilePicURL || ""}
+            src={profile}
             alt="user"
             onClick={() => handleProfileClick(userProfile?.username)}
           />

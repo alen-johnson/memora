@@ -98,7 +98,7 @@ function HomePage() {
 
         <FloatButton icon={<PlusOutlined />} type="primary" onClick={() => navigate('/post')} />
         <div className="home__body-side">
-          <SuggestedUsers />
+          <SuggestedUsers />   
         </div>
       </div>
     </div>

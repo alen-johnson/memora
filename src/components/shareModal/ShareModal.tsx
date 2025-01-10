@@ -21,7 +21,7 @@ function ShareModal({ post }: PostProps) {
   const { userProfile } = useGetProfileById(post.createdBy);
 
   const handleCopyClick = () => {
-    navigator.clipboard.writeText(`https://vibesnap-topaz.vercel.app/${userProfile?.username}`).then(() => {
+    navigator.clipboard.writeText(`https://memora-social.vercel.app/${userProfile?.username}`).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
@@ -108,7 +108,7 @@ function ShareModal({ post }: PostProps) {
       <div className="share__row3">
         <h4>Page Link</h4>
         <div className="share__row3-url">
-          <p>{`https://vibesnap-topaz.vercel.app/${userProfile?.username}`}</p>
+          <p>{`https://memora-social.vercel.app/${userProfile?.username}`}</p>
           <button className="btn-copy" onClick={handleCopyClick}>
             <span
               className="cp-tooltip"
