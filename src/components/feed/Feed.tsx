@@ -5,12 +5,14 @@ import "./Feed.css";
 import useGetFeed from "../../hooks/useGetFeed";
 import { Post } from "../../store/postStore";
 import { lightColors } from "../../helpers/lightColours";
+import useAuthStore from "../../store/authStore";
 
 function Feed() {
   const { isLoading, posts, fetchMorePosts, isEndOfFeed } = useGetFeed();
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [filter, setFilter] = useState<string>("Friends");
-
+  const authUser = useAuthStore((state) => state.user);
+  const count = authUser?.followers.length || 0;
   const handleFilterChange = (selected: string) => {
     setFilter(selected);
   };
@@ -89,7 +91,7 @@ function Feed() {
         </div>
       )}
 
-      {isEndOfFeed && (
+      {isEndOfFeed && count> 0 && (
         <div className="feed__end">
         <p className="feed__end-message">You've reached the end of the feed</p>
         <ToTopButton/>
