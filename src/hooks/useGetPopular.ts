@@ -4,12 +4,13 @@ import useShowMessage from "./useShowMessage";
 import { collection, query, getDocs, limit, orderBy} from "firebase/firestore";
 import { db } from "../services/firebase";
 
-const POSTS_PER_PAGE = 10;
+
 
 const useGetPopular = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { posts, setPosts } = usePostStore();
   const { showError } = useShowMessage();
+  const POSTS_PER_PAGE = import.meta.env.VITE_LIMITS_PER_PAGE
 
   useEffect(() => {
     const getPopularPosts = async () => {
@@ -18,7 +19,7 @@ const useGetPopular = () => {
 
         const q = query(
           collection(db, "posts"),
-          orderBy("likes", "desc"),  
+          orderBy("createdAt", "desc"),  
           limit(POSTS_PER_PAGE) 
         );
         const querySnapShot = await getDocs(q);

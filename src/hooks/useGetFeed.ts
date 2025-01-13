@@ -5,7 +5,7 @@ import useShowMessage from "./useShowMessage";
 import { db } from "../services/firebase";
 import { query, collection, where, orderBy, limit, startAfter, getDocs,QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
 
-const POSTS_PER_PAGE = 10;
+
 
 const useGetFeed = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,6 +14,7 @@ const useGetFeed = () => {
   const { posts, setPosts } = usePostStore();
   const authUser = useAuthStore((state) => state.user);
   const { showError } = useShowMessage();
+  const POSTS_PER_PAGE = import.meta.env.VITE_LIMITS_PER_PAGE
 
   const fetchFeedPosts = async (isInitialLoad = false) => {
     if (isLoading || isEndOfFeed) return;
