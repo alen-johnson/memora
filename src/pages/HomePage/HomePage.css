@@ -52,19 +52,24 @@
 
 .home__body-content {
   width: 100%;
+  flex: 2;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.home__body-nav {
+
+.home__body-left {
   display: flex;
-margin: 12rem 0 0;
+  flex: 1;
+  max-width: 250px;
+  margin: 12rem 0 0;
 }
 
-.home__body-side {
+.home__body-right {
+  flex: 1;
   width: fit-content;
-  max-width: 100%;
+  max-width: 250px;
   margin-top: 3.5rem;
 }
 
@@ -104,9 +109,17 @@ margin: 12rem 0 0;
   }
 }
 
+@media screen and (max-width: 950px) {
+  .home__body-left{
+    max-width: 200px;
+  }
+}
+
 @media screen and (max-width: 800px) {
-  .home__body-side {
+  .home__body-right {
     display: none;
   }
-
+  .home__body-left{
+    display: none;
+  }
 }

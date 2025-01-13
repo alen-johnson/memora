@@ -22,7 +22,6 @@ const useLikePost = (post: Post) => {
   const handleLikePost = async () => {
     if (isUpdating) return;
     if (!authUser) return showError("Login to like posts");
-  console.log(post)
     if (!post.id) {
       showError("Invalid post ID");
       return;

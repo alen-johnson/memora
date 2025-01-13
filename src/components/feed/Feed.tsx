@@ -12,7 +12,7 @@ function Feed() {
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [filter, setFilter] = useState<string>("Friends");
   const authUser = useAuthStore((state) => state.user);
-  const count = authUser?.followers.length || 0;
+  const count = authUser?.following.length || 0;
   const handleFilterChange = (selected: string) => {
     setFilter(selected);
   };
@@ -64,7 +64,7 @@ function Feed() {
       </div>
     );
   }
-
+  
   return (
     <div className="feed">
       <div className="feed__radionav">
@@ -90,7 +90,6 @@ function Feed() {
           <Skeleton active paragraph={{ rows: 1 }} />
         </div>
       )}
-
       {isEndOfFeed && count> 0 && (
         <div className="feed__end">
         <p className="feed__end-message">You've reached the end of the feed</p>

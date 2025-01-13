@@ -80,7 +80,7 @@ function HomePage() {
       </div>
 
       <div className="home__body">
-        <div className="home__body-nav">
+        <div className="home__body-left">
           {isMobile && toggleMenu && (
             <div className="navbar-menu-container">
               <Navbar onTabChange={handleTabChange} />
@@ -97,7 +97,7 @@ function HomePage() {
         </div>
 
         <FloatButton icon={<PlusOutlined />} type="primary" onClick={() => navigate('/post')} />
-        <div className="home__body-side">
+        <div className="home__body-right">
           <SuggestedUsers />   
         </div>
       </div>
