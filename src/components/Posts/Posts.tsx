@@ -38,34 +38,34 @@ function Posts({ post, index, lightColors }: PostProps) {
 
   return (
     <div
-      className="feed"
+      className="posts"
       style={{ backgroundColor: lightColors[index % lightColors.length] }}
     >
-      <div className="feed__header">
-        <div className="feed__header-profile">
+      <div className="posts__header">
+        <div className="posts__header-profile">
           <img
             src={profile}
             alt="user"
             onClick={() => handleProfileClick(userProfile?.username)}
           />
-          <div className="feed__header-profile_det">
+          <div className="posts__header-profile_det">
             <h4 onClick={() => handleProfileClick(userProfile?.username)}>
               {userProfile?.username || "Unknown User"}
             </h4>
             <p>{formatTime(post.createdAt)}</p>
           </div>
         </div>
-        <div className="feed__header-content">
+        <div className="posts__header-content">
           <p>{post.caption}</p>
         </div>
       </div>
 
-      <div className="feed__content">
+      <div className="posts__content">
         {post.imgUrls?.map((url, idx) =>
           isVideo(url) ? (
             <video
               key={idx}
-              className={`feed__content-media ${
+              className={`posts__content-media ${
                 post.imgUrls.length > 1 ? "multi-image" : ""
               }`}
               autoPlay
@@ -83,7 +83,7 @@ function Posts({ post, index, lightColors }: PostProps) {
               key={idx}
               src={url}
               alt={`post-image-${idx}`}
-              className={`feed__content-img ${
+              className={`posts__content-img ${
                 post.imgUrls.length > 1 ? "multi-image" : ""
               }`}
             />
@@ -91,10 +91,10 @@ function Posts({ post, index, lightColors }: PostProps) {
         )}
       </div>
 
-      <div className="feed__footer">
+      <div className="posts__footer">
         <LikeButton post={post} />
         <Button
-          className="feed__footer-sharebtn"
+          className="posts__footer-sharebtn"
           onClick={setModal}
           icon={<ShareAltOutlined />}
         >
