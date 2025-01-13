@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://memora-social.vercel.app/sitemap.xml
