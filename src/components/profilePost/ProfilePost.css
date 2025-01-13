@@ -9,7 +9,6 @@
 
 .profile__posts-item {
   background-color: #fff;
-  border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -26,7 +25,8 @@
 
 .profile__posts-media {
   width: 90%;
-  height: 90%;
+  height: 80%;
+  border-radius: 10px;
   object-fit: contain; 
   display: block;
 }
